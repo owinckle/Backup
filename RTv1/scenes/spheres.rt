@@ -1,0 +1,45 @@
+camera:
+pos:
+0, 0, 150
+dir:
+0, 0, 0
+----
+spheres:
+new:
+pos:
+60, 30, 0
+radius:
+30
+color:
+255, 0, 0
+----
+new:
+pos:
+60, -30, -60
+radius:
+50
+color:
+100, 45, 255
+----
+new:
+pos:
+30, 20, 30
+radius:
+15
+color:
+42, 255, 255
+----
+new:
+pos:
+-50, 0, -350
+radius:
+200
+color:
+0, 255, 0
+----
+----
+spot:
+pos:
+50, -20, 170
+----
+END
