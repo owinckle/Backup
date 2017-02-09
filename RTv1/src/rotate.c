@@ -54,24 +54,20 @@ static t_vect	*z(t_vect *v, double rot, int stage)
 
 t_ray			*rotate_eye(t_ray *ray, t_vect *rot, int stage, t_vect *pos)
 {
+	// ray->og->x += stage * pos->x;
+	// ray->og->y += stage * pos->y;
+	// ray->og->z += stage * pos->z;
 	if (stage == 1)
 	{
-		ray->og = x(ray->og, rot->x, stage);
 		ray->og = y(ray->og, rot->y, stage);
-		ray->og = z(ray->og, rot->z, stage);
 		ray->dir = x(ray->dir, rot->x, stage);
 		ray->dir = y(ray->dir, rot->y, stage);
 		ray->dir = z(ray->dir, rot->z, stage);
 	}
-		// ray->og->x += stage * pos->x;
-		// ray->og->y += stage * pos->y;
-		// ray->og->z += stage * pos->z;
-		(void)pos;
+	(void)pos;
 	if (stage == -1)
 	{
-		ray->og = z(ray->og, rot->z, stage);
 		ray->og = y(ray->og, rot->y, stage);
-		ray->og = x(ray->og, rot->x, stage);
 		ray->dir = z(ray->dir, rot->z, stage);
 		ray->dir = y(ray->dir, rot->y, stage);
 		ray->dir = x(ray->dir, rot->x, stage);
