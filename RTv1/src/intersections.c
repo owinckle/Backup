@@ -49,12 +49,16 @@ t_inter	*planes_inter(t_env *e, t_ray *ray, int limiter, t_vect *pt)
 	mininter = -1;
 	while (p != NULL && limiter-- != 0)
 	{
+		ray = rotate_eye(ray, p->rotate, -1, p->og);
 		inter = plane_inter(p, ray);
+		ray = rotate_eye(ray, p->rotate, 1, p->og);
 		if (inter > ACCURACY && (inter < mininter || mininter == -1))
 		{
 			mininter = inter;
-			normal = p->og;
+			ray = rotate_eye(ray, p->rotate, -1, p->og);
 			pt = vect_add(ray->og, vect_mult(ray->dir, inter));
+			ray = rotate_eye(ray, p->rotate, 1, p->og);
+			normal = rotate_normal(pt, p->rotate);
 			c = p->color;
 		}
 		p = p->next;
@@ -103,16 +107,16 @@ t_inter	*cones_inter(t_env *e, t_ray *ray, int limiter, t_vect *p)
 	mininter = -1;
 	while (co != NULL && limiter-- != 0)
 	{
-		// ray = rotate_eye(ray, co->rotate, -1, co->og);
+		ray = rotate_eye(ray, co->rotate, -1, co->og);
 		inter = cone_inter(co, ray);
-		// ray = rotate_eye(ray, co->rotate, 1, co->og);
+		ray = rotate_eye(ray, co->rotate, 1, co->og);
 		if (inter > ACCURACY && (inter < mininter || mininter == -1))
 		{
 			mininter = inter;
-			// ray = rotate_eye(ray, co->rotate, -1, co->og);
+			ray = rotate_eye(ray, co->rotate, -1, co->og);
 			p = vect_add(ray->og, vect_mult(ray->dir, inter));
-			// ray = rotate_eye(ray, co->rotate, 1, co->og);
-			normal = /*rotate_normal*/(cone_normal(co->og, p)/*, co->rotate*/);
+			ray = rotate_eye(ray, co->rotate, 1, co->og);
+			normal = rotate_normal(cone_normal(co->og, p), co->rotate);
 			color = co->color;
 		}
 		co = co->next;

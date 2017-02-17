@@ -28,8 +28,8 @@
 # define ASPR ((double)WIDTH / (double)HEIGHT)
 # define ACCURACY 0.00000001
 # define ACCURACY2 1
-# define AMBIENTLIGHT 0.2
-# define DIFFUSELIGHT 0.8
+# define AMBIENTLIGHT 0.15
+# define DIFFUSELIGHT 0.85
 # define DEG_TO_RAD(x)	(x * (M_PI/180))
 
 typedef struct		s_mlx

@@ -37,3 +37,4 @@ t_vect		*cone_normal(t_vect *og, t_vect *point)
 		negative(new_vector(og->x, 0, og->z))));
 	return (v);
 }
+
