@@ -24,7 +24,7 @@ LDIR = libft
 
 LIB = -L$(LDIR) -lft
 
-MLX = -lmlx -framework OpenGL -framework Appkit
+MLX = -lmlx -framework OpenGL -framework Appkit -lpthread
 
 INC = -I$(IDIR)
 
@@ -48,7 +48,11 @@ SRC_FILES = main.c \
 			error.c \
 			functions.c \
 			parse.c \
-			objects.c
+			objects.c \
+			draw.c \
+			thread.c \
+			vectors.c \
+			inter.c
 
 
 

@@ -37,3 +37,22 @@ int		linelen(char *buf, int k)
 	}
 	return (++len);
 }
+
+int		key_hook(int k, t_env *e)
+{
+	if (k == KEY_ESC)
+		ft_red(e);
+	return (0);
+}
+
+void	fzero(float *s, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		s[i] = 0.0f;
+		i++;
+	}
+}

@@ -12,10 +12,10 @@
 
 #include "rtv1.h"
 
-static int		ft_red(t_env *e)
+int				ft_red(t_env *e)
 {
 	mlx_destroy_window(e->mlx.mlx, e->mlx.win);
-	ft_bs(9, "\x1b[33m[TERMINATED]", 1);
+	ft_bs(3, "\x1b[33m[TERMINATED]", 1);
 	exit(0);
 }
 
@@ -90,6 +90,8 @@ int				main(int ac, char **av)
 	if (ac != 2)
 		ft_error(ARG);
 	e = init_env(av[1]);
+	draw(e);
+	mlx_key_hook(e->mlx.win, key_hook, e);
 	mlx_hook(e->mlx.win, 17, 0, ft_red, e);
 	mlx_loop(e->mlx.mlx);
 	return (0);

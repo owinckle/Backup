@@ -102,6 +102,8 @@ static void	parse_objs(t_env *e, int j)
 			e = add_plane(e, &j, 6);
 		else if (ft_strcmp(e->scene[j], "	object(sphere)") == 0)
 			e = add_sphere(e, &j, 7);
+		else
+			ft_error(FILE);
 	}
 }
 

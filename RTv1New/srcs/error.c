@@ -26,13 +26,14 @@ static void	error_arg(void)
 
 static void	error_file(void)
 {
-	write(1, "File Error\n", 11);
+	ft_putchar(8);
+	write(1, "File Error ]\n", 13);
 	exit(-1);
 }
 
-static void	error_parse(void)
+static void	error_data(void)
 {
-	write(1, "Parse Error\n", 12);
+	write(1, "Data Error\n", 12);
 	exit(-1);
 }
 
@@ -45,10 +46,5 @@ void		ft_error(int error)
 	if (error == 3)
 		error_file();
 	if (error == 4)
-		error_parse();
-	if (error == 5)
-	{
-		write(1, "Data Error\n", 12);
-		exit(-1);
-	}
+		error_data();
 }
