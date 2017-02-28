@@ -78,6 +78,8 @@ static t_env	*init_env(char *file)
 	e->lc = 0;
 	buf = get_buf(&(e->lc), e->fd);
 	e->scene = get_scene(buf, e->lc, 0);
+	e->light = NULL;
+	e->obj = NULL;
 	e = parse(e);
 	return (e);
 }

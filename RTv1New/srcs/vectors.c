@@ -42,10 +42,20 @@ void	v_norm(t_vect *v)
 	v->z *= n;
 }
 
-float	v_dot(t_vec *v1, t_vec *v2)
+float	v_dot(t_vect *v1, t_vect *v2)
 {
 	float	res;
 
 	res = v1->x * v2->x + v1->y * v2->y + v1->z * v2->z;
+	return (res);
+}
+
+t_vect	v_scale(t_vect *v, float n)
+{
+	t_vect	res;
+
+	res.x = v->x * n;
+	res.y = v->y * n;
+	res.z = v->z * n;
 	return (res);
 }

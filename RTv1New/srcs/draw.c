@@ -12,17 +12,20 @@
 
 #include "rtv1.h"
 
-// static void		mlx_put_pxl(int x, int y, int color, t_env *e)
-// {
-// 	unsigned int	new_color;
-// 	int				i;
+static void		ft_put_pixel(t_th *th, int x, int y, int color)
+{
+	int				i;
+	unsigned int	p;
 
-// 	new_color = mlx_get_color_value(e->mlx.mlx, color);
-// 	i = x * 4 + y * e->mlx.sl;
-// 	e->mlx.pxl[i] = (new_color & 0xFF);
-// 	e->mlx.pxl[i + 1] = (new_color & 0xFF00) >> 8;
-// 	e->mlx.pxl[i + 2] = (new_color & 0xFF0000) >> 16;
-// }
+	i = 0;
+	p = x * (th->mlx.bpp / 8) + y * (th->mlx.sl);
+	while (i < (th->mlx.bpp / 8))
+	{
+		th->mlx.pxl[p + i] = color;
+		color >>= 8;
+		i++;
+	}
+}
 
 static void		set_ray(t_th *th, double x, double y)
 {
@@ -48,18 +51,20 @@ static void		raytracing(t_th *th, t_obj *node, double x, double y)
 {
 	t_obj			*tmp;
 	float			*tab;
-	float			rgb[3];
+	float			r[3];
 	double			p;
 
-	(void)node;
-	(void)tmp;
 	if (!(tab = (float*)malloc(sizeof(float) * 4)))
 		ft_error(MALLOC);
-	fzero(rgb, 3);
+	fzero(r, 3);
 	p = 0;
 	set_ray(th, x, y);
 	if ((tmp = inter(th, node, th->ray_dir, th->cam_pos)))
 	// 			tab = lambert(th, tmp, th->light, tab);
+	ft_average(r, tab);
+	r[0] = 255;
+	ft_put_pixel(th, (int)x, (int)y, (((int)(r[0] / p * 255) & 0xff) << 16) +
+		(((int)(r[1] / p * 255) & 0xff) << 8) + ((int)(r[2] / p * 255) & 0xff));
 	free(tab);
 }
 

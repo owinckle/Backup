@@ -37,6 +37,9 @@
 # define CAMDX		e->cam_dir.x
 # define CAMDY		e->cam_dir.y
 # define CAMDZ		e->cam_dir.z
+# define RAYDX		e->ray_dir.x
+# define RAYDY		e->ray_dir.y
+# define RAYDZ		e->ray_dir.z
 # define THI		th->i
 # define THJ		th->j
 # define THK		th->k
@@ -100,9 +103,16 @@ typedef struct		s_th
 	t_vect			i;
 	t_vect			j;
 	t_vect			k;
+	t_vect			dist;
+	t_vect			norm;
 	t_vect			ray_dir;
 	t_mlx			mlx;
+	float			t0;
+	float			t1;
 	float			t;
+	float			a;
+	float			b;
+	float			c;
 }					t_th;
 
 typedef struct		s_th_tab
@@ -128,11 +138,16 @@ int					linelen(char *buf, int k);
 int					open_file(char *file);
 int					key_hook(int k, t_env *e);
 void				fzero(float *s, int n);
+float				*ft_average(float *r, float *tab);
 
 /*
 ** inter.c
 */
-t_obj				*inter(t_th *th, t_obj *node, t_vect ray, t_vect pos);
+double			inter_cylinder(t_th *th, t_obj *tmp, t_vect ray, t_vect pos);
+double			inter_cone(t_th *th, t_obj *tmp, t_vect ray, t_vect pos);
+double			inter_sphere(t_th *th, t_obj *tmp, t_vect ray, t_vect pos);
+double			inter_plane(t_th *th, t_obj *tmp, t_vect ray, t_vect pos);
+t_obj			*inter(t_th *th, t_obj *node, t_vect ray, t_vect pos);
 
 /*
 ** main.c
@@ -165,6 +180,7 @@ int					free_lists(t_obj *light, t_obj *obj);
 t_vect				v_sub(t_vect *v1, t_vect *v2);
 t_vect				v_cross(t_vect *v1, t_vect *v2);
 void				v_norm(t_vect *v);
-float				v_dot(t_vec *v1, t_vec *v2);
+float				v_dot(t_vect *v1, t_vect *v2);
+t_vect				v_scale(t_vect *v, float n);
 
 #endif

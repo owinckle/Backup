@@ -21,6 +21,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+float				ft_clamp(float value, float min, float max);
 int					ft_atoin(char *str, int *k);
 char				*ft_strjoin(char const *s1, char const *s2);
 void				debug(char *debug);

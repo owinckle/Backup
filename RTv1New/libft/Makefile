@@ -90,7 +90,8 @@ SRCS = ft_memset.c \
 	   debug.c \
 	   ft_bs.c \
 	   ft_strjoint.c \
-	   ft_atoin.c
+	   ft_atoin.c \
+	   ft_clamp.c
 
 OBJS = $(SRCS:.c=.o)
 

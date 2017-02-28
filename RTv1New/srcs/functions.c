@@ -56,3 +56,11 @@ void	fzero(float *s, int n)
 		i++;
 	}
 }
+
+float	*ft_average(float *r, float *tab)
+{
+	r[0] += ft_clamp(tab[0], 0.0, 1.0);
+	r[1] += ft_clamp(tab[1], 0.0, 1.0);
+	r[2] += ft_clamp(tab[2], 0.0, 1.0);
+	return (r);
+}
