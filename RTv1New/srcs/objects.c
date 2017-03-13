@@ -80,10 +80,11 @@ t_env			*add_cyclone(t_env *e, int *j, int i, int t)
 	link->rot.z = (float)ft_atoin(e->scene[*j + 4], &i);
 	if (e->scene[*j + 4][i] != ')')
 		ft_error(FILE);
-	if (ft_strncmp(e->scene[*j + 4], "		size(", 7) != 0)
+	if (ft_strncmp(e->scene[*j + 5], "		size(", 7) != 0)
 		ft_error(FILE);
-	link->size = ft_atoin(e->scene[*j + 4], &i);
-	if (e->scene[*j + 4][i] != ')')
+	i = 7;
+	link->size = ft_atoin(e->scene[*j + 5], &i);
+	if (e->scene[*j + 5][i] != ')')
 		ft_error(FILE);
 	link->next = NULL;
 	e->obj = add_link(e, link, 2);

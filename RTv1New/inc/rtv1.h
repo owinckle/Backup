@@ -31,18 +31,29 @@
 # define FILE		3
 # define DATA		4
 
-# define CAMX		e->cam_pos.x
-# define CAMY		e->cam_pos.y
-# define CAMZ		e->cam_pos.z
-# define CAMDX		e->cam_dir.x
-# define CAMDY		e->cam_dir.y
-# define CAMDZ		e->cam_dir.z
-# define RAYDX		e->ray_dir.x
-# define RAYDY		e->ray_dir.y
-# define RAYDZ		e->ray_dir.z
-# define THI		th->i
-# define THJ		th->j
-# define THK		th->k
+# define CAMX			e->cam_pos.x
+# define CAMY			e->cam_pos.y
+# define CAMZ			e->cam_pos.z
+# define CAMDX			e->cam_dir.x
+# define CAMDY			e->cam_dir.y
+# define CAMDZ			e->cam_dir.z
+# define RAYDX			e->ray_dir.x
+# define RAYDY			e->ray_dir.y
+# define RAYDZ			e->ray_dir.z
+
+# define TH_CAMX		th->cam_pos.x
+# define TH_CAMY		th->cam_pos.y
+# define TH_CAMZ		th->cam_pos.z
+# define TH_CAMDX		th->cam_dir.x
+# define TH_CAMDY		th->cam_dir.y
+# define TH_CAMDZ		th->cam_dir.z
+# define TH_RAYDX		th->ray_dir.x
+# define TH_RAYDY		th->ray_dir.y
+# define TH_RAYDZ		th->ray_dir.z
+
+# define THI			th->i
+# define THJ			th->j
+# define THK			th->k
 
 typedef struct		s_vect
 {
@@ -143,11 +154,17 @@ float				*ft_average(float *r, float *tab);
 /*
 ** inter.c
 */
-double			inter_cylinder(t_th *th, t_obj *tmp, t_vect ray, t_vect pos);
-double			inter_cone(t_th *th, t_obj *tmp, t_vect ray, t_vect pos);
-double			inter_sphere(t_th *th, t_obj *tmp, t_vect ray, t_vect pos);
-double			inter_plane(t_th *th, t_obj *tmp, t_vect ray, t_vect pos);
-t_obj			*inter(t_th *th, t_obj *node, t_vect ray, t_vect pos);
+double				inter_cylinder(t_th *th, t_obj *tmp, t_vect ray,
+						t_vect pos);
+double				inter_cone(t_th *th, t_obj *tmp, t_vect ray, t_vect pos);
+double				inter_sphere(t_th *th, t_obj *tmp, t_vect ray, t_vect pos);
+double				inter_plane(t_th *th, t_obj *tmp, t_vect ray, t_vect pos);
+t_obj				*inter(t_th *th, t_obj *node, t_vect ray, t_vect pos);
+
+/*
+** light.c
+*/
+float				*lambert(t_th *th, t_obj *tmp, t_obj *light, float *tab);
 
 /*
 ** main.c
@@ -166,7 +183,7 @@ t_env				*add_sphere(t_env *e, int *j, int i);
 ** parse.c
 */
 t_env				*parse(t_env *e);
-t_obj				*add_link(t_env *e, t_obj *link, int type);	
+t_obj				*add_link(t_env *e, t_obj *link, int type);
 
 /*
 ** thread.c

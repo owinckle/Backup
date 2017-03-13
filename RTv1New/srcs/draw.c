@@ -27,7 +27,7 @@ static void		ft_put_pixel(t_th *th, int x, int y, int color)
 	}
 }
 
-static void		set_ray(t_th *th, double x, double y)
+static void		set_ray(t_th *th, float *tab, double x, double y)
 {
 	double		xx;
 	double		yy;
@@ -44,6 +44,7 @@ static void		set_ray(t_th *th, double x, double y)
 		xx * THI.y + yy * THJ.y + 2 * THK.y,
 		xx * THI.z + yy * THJ.z + 2 * THK.z
 	};
+	fzero(tab, 4);
 	v_norm(&th->ray_dir);
 }
 
@@ -52,19 +53,16 @@ static void		raytracing(t_th *th, t_obj *node, double x, double y)
 	t_obj			*tmp;
 	float			*tab;
 	float			r[3];
-	double			p;
 
 	if (!(tab = (float*)malloc(sizeof(float) * 4)))
 		ft_error(MALLOC);
 	fzero(r, 3);
-	p = 0;
-	set_ray(th, x, y);
+	set_ray(th, tab, x, y);
 	if ((tmp = inter(th, node, th->ray_dir, th->cam_pos)))
-	// 			tab = lambert(th, tmp, th->light, tab);
+		tab = lambert(th, tmp, th->light, tab);
 	ft_average(r, tab);
-	r[0] = 255;
-	ft_put_pixel(th, (int)x, (int)y, (((int)(r[0] / p * 255) & 0xff) << 16) +
-		(((int)(r[1] / p * 255) & 0xff) << 8) + ((int)(r[2] / p * 255) & 0xff));
+	ft_put_pixel(th, (int)x, (int)y, (((int)(r[0] * 255) & 0xff) << 16) +
+		(((int)(r[1] * 255) & 0xff) << 8) + ((int)(r[2] * 255) & 0xff));
 	free(tab);
 }
 
@@ -84,10 +82,7 @@ static void		*processing(void *arg)
 	{
 		x = WIDTH * tab->i / THREAD;
 		while (x < WIDTH * (tab->i + 1) / THREAD)
-		{
 			raytracing(th, node, x++, y);
-			x++;
-		}
 		y++;
 	}
 	free_lists(th->light, th->obj);

@@ -52,7 +52,8 @@ SRC_FILES = main.c \
 			draw.c \
 			thread.c \
 			vectors.c \
-			inter.c
+			inter.c \
+			light.c
 
 
 

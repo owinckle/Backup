@@ -82,7 +82,7 @@ double	inter_plane(t_th *th, t_obj *tmp, t_vect ray, t_vect pos)
 	return (th->t0);
 }
 
-t_obj			*inter(t_th *th, t_obj *node, t_vect ray, t_vect pos)
+t_obj	*inter(t_th *th, t_obj *node, t_vect ray, t_vect pos)
 {
 	t_obj		*tmp;
 	double		dist;

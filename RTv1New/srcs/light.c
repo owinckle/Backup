@@ -12,10 +12,19 @@
 
 #include "rtv1.h"
 
-static int		shadow(t_th *th, t_obj *tmp, t_obj *light, t_vec pos)
+static float	*lighting(t_obj *tmp, t_obj *light, float *tab, float d)
+{
+	tab[3] = ft_clamp(tab[3] * 4.0 * d, 0.0, 1.0);
+	tab[0] += tab[3] * (tmp->color.red / 255) * (light->color.red / 255);
+	tab[1] += tab[3] * (tmp->color.green / 255) * (light->color.green / 255);
+	tab[2] += tab[3] * (tmp->color.blue / 255) * (light->color.blue / 255);
+	return (tab);
+}
+
+static int		shadow(t_th *th, t_obj *tmp, t_obj *light, t_vect pos)
 {
 	t_obj	*node;
-	t_vec	dist;
+	t_vect	dist;
 
 	node = th->obj;
 	dist = v_sub(&light->pos, &pos);
@@ -26,13 +35,13 @@ static int		shadow(t_th *th, t_obj *tmp, t_obj *light, t_vec pos)
 		if (node != tmp)
 		{
 			if (node->type == 1)
-				th->a = ft_inter_cone(th, node, dist, pos);
+				th->a = inter_cone(th, node, dist, pos);
 			else if (node->type == 2)
-				th->a = ft_inter_cylinder(th, node, dist, pos);
+				th->a = inter_cylinder(th, node, dist, pos);
 			else if (node->type == 3)
-				th->a = ft_inter_plane(th, node, dist, pos);
+				th->a = inter_plane(th, node, dist, pos);
 			else if (node->type == 4)
-				th->a = ft_inter_sphere(th, node, dist, pos);
+				th->a = inter_sphere(th, node, dist, pos);
 			if (th->a > 0.0001 && th->a < th->t)
 				return (1);
 		}
@@ -71,22 +80,19 @@ float			*lambert(t_th *th, t_obj *tmp, t_obj *light, float *tab)
 	t_vect		dist;
 	float		d;
 
-	pos = (t_vect){CAMX + th->t * RAYDX, CAMY + th->t * RAYDY,
-			CAMZ + th->t * RAYDZ};
+	pos = (t_vect){TH_CAMX + th->t * TH_RAYDX, TH_CAMY + th->t * TH_RAYDY,
+			TH_CAMZ + th->t * TH_RAYDZ};
 	th->norm = norm(th, tmp, pos);
-	while (th->light != NULL)
+	while (light != NULL)
 	{
 		tab[3] = 0.15;
-		dist = v_sub(l&light->pos, &pos);
+		dist = v_sub(&light->pos, &pos);
 		d = ft_clamp((1.0 / sqrtf(sqrtf(v_dot(&dist, &dist)))), 0., 1.);
-		if (ft_shadow(mlx, tmp, light, pos) == 0)
-			tab[3] += ft_clamp(ft_vectordot(&dist, &mlx->norm), 0.0, 1.0);
 		v_norm(&dist);
-		tab = ft_endlight(tmp, light, tab, d);
-		tab[0] += (COND2) ? ft_spec(mlx, dist, d, tab[3]) : 0.0;
-		tab[1] += (COND2) ? ft_spec(mlx, dist, d, tab[3]) : 0.0;
-		tab[2] += (COND2) ? ft_spec(mlx, dist, d, tab[3]) : 0.0;
+		if (shadow(th, tmp, light, pos) == 0)
+			tab[3] += ft_clamp(v_dot(&dist, &th->norm), 0.0, 1.0);
+		tab = lighting(tmp, light, tab, d);
 		light = light->next;
-		th->light = th->light->next;
 	}
+	return (tab);
 }

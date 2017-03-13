@@ -95,9 +95,9 @@ static void	parse_objs(t_env *e, int j)
 		if (ft_strcmp(e->scene[j], "	object(light)") == 0)
 			e = add_light(e, &j, 6);
 		else if (ft_strcmp(e->scene[j], "	object(cone)") == 0)
-			e = add_cyclone(e, &j, 7, 1);
+			e = add_cyclone(e, &j, 6, 1);
 		else if (ft_strcmp(e->scene[j], "	object(cylinder)") == 0)
-			e = add_cyclone(e, &j, 7, 2);
+			e = add_cyclone(e, &j, 6, 2);
 		else if (ft_strcmp(e->scene[j], "	object(plane)") == 0)
 			e = add_plane(e, &j, 6);
 		else if (ft_strcmp(e->scene[j], "	object(sphere)") == 0)

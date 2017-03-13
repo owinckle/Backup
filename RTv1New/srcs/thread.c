@@ -48,7 +48,7 @@ t_th			*init_thread(t_env *e)
 	return (th);
 }
 
-int			free_lists(t_obj *light, t_obj *obj)
+int				free_lists(t_obj *light, t_obj *obj)
 {
 	t_obj	*fst;
 	t_obj	*tmp;
