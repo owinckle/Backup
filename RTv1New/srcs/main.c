@@ -92,7 +92,7 @@ int				main(int ac, char **av)
 	if (ac != 2)
 		ft_error(ARG);
 	e = init_env(av[1]);
-	if (e->obj != NULL)
+	if (e->obj != NULL && e->light != NULL)
 		draw(e);
 	ft_bs(3, "\x1b[33m[RUNNING]", 0);
 	mlx_key_hook(e->mlx.win, key_hook, e);
