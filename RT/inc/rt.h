@@ -71,6 +71,10 @@ typedef struct		s_obj
 {
 	int				type;
 	float			size;
+	float			shine;
+	float			reflection;
+	float			negative;
+	float			cel_shading;
 	t_vect			rot;
 	t_vect			pos;
 	t_color			color;
@@ -84,6 +88,7 @@ typedef	struct		s_env
 	t_vect			cam_pos;
 	t_vect			cam_dir;
 	float			lighting;
+	float			antialiasing;
 	char			**scene;
 	char			*file;
 	int				lc;
@@ -104,6 +109,7 @@ t_env				*add_sphere(t_env *e, int *j, int i);
 ** parsing/options.c
 */
 void				parse_options(t_env *e);
+t_obj				*parse_effects(t_obj *link, int j, int i, t_env *e);
 
 /*
 ** parsing/parse.c

@@ -68,6 +68,7 @@ static t_env	*init_env(char *file)
 	e->scene = get_scene(buf, e->lc, 0);
 	e->light = NULL;
 	e->obj = NULL;
+	e->antialiasing = 0;
 	e = parse(e);
 	return (e);
 }
@@ -79,6 +80,7 @@ int				main(int ac, char **av)
 	if (ac != 2)
 		ft_error(ARG);
 	e = init_env(av[1]);
+	/******************** DEBUG START ********************/
 	printf("CAMX = %f\n", CAMX);
 	printf("CAMY = %f\n", CAMY);
 	printf("CAMZ = %f\n", CAMZ);
@@ -86,5 +88,7 @@ int				main(int ac, char **av)
 	printf("CAMDY = %f\n", CAMDY);
 	printf("CAMDZ = %f\n", CAMDZ);
 	printf("LIGHT = %f\n", LIGHT);
+	printf("ANTIALISING = %f\n", e->antialiasing);
+	/******************** DEBUG STOP ********************/
 	return (0);
 }

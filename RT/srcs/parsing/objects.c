@@ -70,7 +70,7 @@ t_env			*add_cyclone(t_env *e, int *j, int i, int t)
 	if (!(link = (t_obj*)malloc(sizeof(t_obj))))
 		ft_error(MALLOC);
 	if (ft_strcmp(e->scene[*j + 1], "	{") != 0 ||
-			ft_strcmp(e->scene[*j + 6], "	}") != 0 || (link->type = t) != t)
+			ft_strcmp(e->scene[*j + 10], "	}") != 0 || (link->type = t) != t)
 		ft_error(FILE);
 	link = col_pos(e, link, *j);
 	if (ft_strncmp(e->scene[*j + 4], "		rot(", 6) != 0)
@@ -86,9 +86,26 @@ t_env			*add_cyclone(t_env *e, int *j, int i, int t)
 	link->size = ft_atoin(e->scene[*j + 5], &i);
 	if (e->scene[*j + 5][i] != ')')
 		ft_error(FILE);
+	link = parse_effects(link, *j + 6, 8, e);
 	link->next = NULL;
 	e->obj = add_link(e, link, 2);
-	*j += 7;
+	*j += 11;
+	/******************** DEBUG START ********************/
+	if (t == 1)
+	{
+		printf("CONE_SHINE = %f\n", link->shine);
+		printf("CONE_REFLECTION = %f\n", link->reflection);
+		printf("CONE_NEGATIVE = %f\n", link->negative);
+		printf("CONE_CEL_SHADING = %f\n\n", link->cel_shading);
+	}
+	else
+	{
+		printf("CYLINDER_SHINE = %f\n", link->shine);
+		printf("CYLINDER_REFLECTION = %f\n", link->reflection);
+		printf("CYLINDER_NEGATIVE = %f\n", link->negative);
+		printf("CYLINDER_CEL_SHADING = %f\n\n", link->cel_shading);
+	}
+	/******************** DEBUG STOP ********************/
 	return (e);
 }
 
@@ -100,7 +117,7 @@ t_env			*add_plane(t_env *e, int *j, int i)
 		ft_error(MALLOC);
 	link->type = 3;
 	if (ft_strcmp(e->scene[*j + 1], "	{") != 0 ||
-			ft_strcmp(e->scene[*j + 5], "	}") != 0)
+			ft_strcmp(e->scene[*j + 9], "	}") != 0)
 		ft_error(FILE);
 	link = col_pos(e, link, *j);
 	if (ft_strncmp(e->scene[*j + 4], "		rot(", 6) != 0)
@@ -110,9 +127,16 @@ t_env			*add_plane(t_env *e, int *j, int i)
 	link->rot.z = (float)ft_atoin(e->scene[*j + 4], &i);
 	if (e->scene[*j + 4][i] != ')')
 		ft_error(FILE);
+	link = parse_effects(link, *j + 5, 8, e);
 	link->next = NULL;
 	e->obj = add_link(e, link, 2);
-	*j += 6;
+	*j += 10;
+	/******************** DEBUG START ********************/
+	printf("PLANE_SHINE = %f\n", link->shine);
+	printf("PLANE_REFLECTION = %f\n", link->reflection);
+	printf("PLANE_NEGATIVE = %f\n", link->negative);
+	printf("PLANE_CEL_SHADING = %f\n\n", link->cel_shading);
+	/******************** DEBUG STOP ********************/
 	return (e);
 }
 
@@ -124,7 +148,7 @@ t_env			*add_sphere(t_env *e, int *j, int i)
 		ft_error(MALLOC);
 	link->type = 4;
 	if (ft_strcmp(e->scene[*j + 1], "	{") != 0 ||
-			ft_strcmp(e->scene[*j + 5], "	}") != 0)
+			ft_strcmp(e->scene[*j + 9], "	}") != 0)
 		ft_error(FILE);
 	link = col_pos(e, link, *j);
 	if (ft_strncmp(e->scene[*j + 4], "		size(", 7) != 0)
@@ -132,8 +156,15 @@ t_env			*add_sphere(t_env *e, int *j, int i)
 	link->size = ft_atoin(e->scene[*j + 4], &i);
 	if (e->scene[*j + 4][i] != ')')
 		ft_error(FILE);
+	link = parse_effects(link, *j + 5, 8, e);
 	link->next = NULL;
 	e->obj = add_link(e, link, 2);
-	*j += 6;
+	*j += 10;
+	/******************** DEBUG START ********************/
+	printf("SPHERE_SHINE = %f\n", link->shine);
+	printf("SPHERE_REFLECTION = %f\n", link->reflection);
+	printf("SPHERE_NEGATIVE = %f\n", link->negative);
+	printf("SPHERE_CEL_SHADING = %f\n\n", link->cel_shading);
+	/******************** DEBUG STOP ********************/
 	return (e);
 }

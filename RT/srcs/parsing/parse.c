@@ -67,7 +67,7 @@ static void	parse_scene(t_env *e, int i)
 {
 	if (ft_strcmp(e->scene[0], "scene") != 0)
 		ft_error(FILE);
-	if (ft_strcmp(e->scene[1], "{") != 0 || ft_strcmp(e->scene[5], "}") != 0)
+	if (ft_strcmp(e->scene[1], "{") != 0 || ft_strcmp(e->scene[6], "}") != 0)
 		ft_error(FILE);
 	if (ft_strncmp(e->scene[2], "	cam_pos(", 9) != 0)
 		ft_error(FILE);
@@ -84,7 +84,7 @@ static void	parse_scene(t_env *e, int i)
 	CAMDZ = (float)ft_atoin(e->scene[3], &i);
 	if (e->scene[3][i] != ')')
 		ft_error(FILE);
-	if (ft_strlen(e->scene[6]) != 0)
+	if (ft_strlen(e->scene[7]) != 0)
 		ft_error(FILE);
 	parse_options(e);
 }
@@ -111,11 +111,11 @@ static void	parse_objs(t_env *e, int j)
 t_env		*parse(t_env *e)
 {
 	parse_scene(e, 9);
-	if (ft_strcmp(e->scene[7], "content") != 0 ||
-			ft_strcmp(e->scene[8], "{") != 0 ||
+	if (ft_strcmp(e->scene[8], "content") != 0 ||
+			ft_strcmp(e->scene[9], "{") != 0 ||
 				ft_strcmp(e->scene[e->lc - 1], "}") != 0)
 		ft_error(FILE);
-	parse_objs(e, 9);
+	parse_objs(e, 10);
 	check_object(e, NULL);
 	return (e);
 }
