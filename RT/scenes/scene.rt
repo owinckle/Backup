@@ -22,6 +22,7 @@ content
 		reflection(1)
 		negative(0)
 		cel_shading(1)
+		transparent(111)
 	}
 	object(plane)
 	{
@@ -32,6 +33,7 @@ content
 		reflection(4)
 		negative(3)
 		cel_shading(2)
+		transparent(111)
 	}
 	object(cone)
 	{
@@ -43,6 +45,7 @@ content
 		reflection(43)
 		negative(44)
 		cel_shading(45)
+		transparent(111)
 	}
 	object(cylinder)
 	{
@@ -54,5 +57,6 @@ content
 		reflection(3)
 		negative(3)
 		cel_shading(7)
+		transparent(111)
 	}
 }

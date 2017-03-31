@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-void		parse_options(t_env *e)
+void			parse_options(t_env *e)
 {
 	int		i;
 
@@ -30,7 +30,17 @@ void		parse_options(t_env *e)
 		ft_error(FILE);
 }
 
-t_obj		*parse_effects(t_obj *link, int j, int i, t_env *e)
+static t_obj	*effect_2(t_obj *link, int j, int i, t_env *e)
+{
+	if (ft_strncmp(e->scene[j + 4], "		transparent(", 14) != 0)
+		ft_error(FILE);
+	link->transparent = ft_atoin(e->scene[j + 4], &i);
+	if (e->scene[j + 4][i] != ')')
+		ft_error(FILE);
+	return (link);
+}
+
+t_obj			*parse_effects(t_obj *link, int j, int i, t_env *e)
 {
 	if (ft_strncmp(e->scene[j], "		shine(", 8) != 0)
 		ft_error(FILE);
@@ -55,5 +65,5 @@ t_obj		*parse_effects(t_obj *link, int j, int i, t_env *e)
 	link->cel_shading = ft_atoin(e->scene[j + 3], &i);
 	if (e->scene[j + 3][i] != ')')
 		ft_error(FILE);
-	return (link);
+	return (effect_2(link, j, 14, e));
 }

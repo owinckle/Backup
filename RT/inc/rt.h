@@ -75,6 +75,7 @@ typedef struct		s_obj
 	float			reflection;
 	float			negative;
 	float			cel_shading;
+	float			transparent;
 	t_vect			rot;
 	t_vect			pos;
 	t_color			color;
