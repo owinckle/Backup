@@ -62,9 +62,8 @@ static t_env	*init_env(char *file)
 	e->width = WIDTH;
 	e->height = HEIGHT;
 	e->file = file;
-	e->fd = open_file(file);
 	e->lc = 0;
-	buf = get_buf(&(e->lc), e->fd);
+	buf = get_buf(&(e->lc), open_file(file));
 	e->scene = get_scene(buf, e->lc, 0);
 	e->light = NULL;
 	e->obj = NULL;

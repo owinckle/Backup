@@ -22,11 +22,11 @@ SDIR = srcs
 
 LDIR = libft
 
-LIB = -L$(LDIR) -lft
+LIB = -L$(LDIR) -lft -L /usr/local/lib
 
 MLX = -lmlx -framework OpenGL -framework Appkit -lpthread
 
-INC = -I$(IDIR)
+INC = -I$(IDIR) -I /usr/local/include
 
 # COLORS
 C_NO = "\033[00m"

@@ -23,7 +23,7 @@ static float	*lighting(t_obj *tmp, t_obj *light, float *tab, float d)
 
 static int		shadow(t_th *th, t_obj *tmp, t_obj *light, t_vect pos)
 {
-	t_obj	*node;0hro
+	t_obj	*node;
 	t_vect	dist;
 
 	node = th->obj;

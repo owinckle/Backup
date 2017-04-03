@@ -19,9 +19,9 @@ t_obj		*add_link(t_env *e, t_obj *link, int type)
 	if (type == 1)
 	{
 		tmp = e->light;
-		if (e->light == NULL)
+		if (e->light == NULL) 
 			return (link);
-		while (e->light->next != NULL)
+		while (e->light->next != NULL) 
 			e->light = e->light->next;
 		e->light->next = link;
 	}
