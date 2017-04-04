@@ -18,7 +18,6 @@ SRC = srcs/main.c\
 	srcs/mlx_stuff/hook_func.c\
 	srcs/mlx_stuff/loop.c\
 	srcs/utils/error.c\
-	srcs/utils/get_line.c\
 	srcs/utils/utils.c\
 	srcs/parsing/parse.c\
 	srcs/parsing/options.c\

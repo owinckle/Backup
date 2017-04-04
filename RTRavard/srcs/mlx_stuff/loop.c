@@ -7,5 +7,4 @@ void	loop(t_env *e)
 	mlx_key_hook(e->win, &key, e);
 	mlx_loop_hook(e->ptr, &loop_hook, e);
 	mlx_loop(e->ptr);
-	debug("5");
 }

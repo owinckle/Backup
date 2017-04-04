@@ -18,6 +18,11 @@
 # define DATA		4
 
 /*
+** DATA
+*/
+# define THREAD		5
+
+/*
 ** ALIASES
 */
 # define CAMX		e->cam_pos.x
@@ -35,24 +40,9 @@
 # define VP_DIST	1.0
 # define MAX_INTER	42000
 
-
 /*
-# define EXIT		65307
-# define ZERO		119
-# define UN		115
-# define DEUX		97
-# define TROIS		100
-# define QUATRE		113
-# define CINQ		101
-# define SIX		65361
-# define SEPT		65363
-# define HUIT		65364
-# define NEUF		65362
-# define DIX		65456
-# define ONZE		32
-# define FAUCON		65505
+** KEYCODES
 */
-
 # define EXIT		53
 # define ZERO		13
 # define UN			1
@@ -67,9 +57,9 @@
 # define DIX		82
 # define ONZE		49
 # define FAUCON		257
-
 # define PAS		3
 # define MILLENIUM	10
+
 # define ROT		M_PI / 25
 
 typedef struct		s_vect
@@ -127,6 +117,7 @@ typedef struct		s_env
 	t_obj			*o;
 	char			move[13];
 
+	t_obj			*obj;
 	float			lighting;
 	float			antialiasing;
 	char			**scene;
@@ -137,6 +128,12 @@ typedef struct		s_env
 	t_vect			cam_dir;
 
 }					t_env;
+
+typedef struct		s_th_tab
+{
+	t_env			*e;
+	int				i;
+}					t_th_tab;
 
 
 // vect_and_mat

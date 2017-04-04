@@ -57,11 +57,13 @@ t_env		*env_init(char *file)
 	while (++i < 12)
 		e->move[i] = 0;
 	e->move[12] = 1;
-	e->antialiasing = 0;
+	e->lc = 0;
 	buf = get_buf(&(e->lc), open_file(file));
 	e->scene = get_scene(buf, e->lc, 0);
 	e->l = NULL;
 	e->o = NULL;
+	e->obj = NULL;
+	e->antialiasing = 0;
 	e = parse(e);
 	return (e);
 }
