@@ -26,7 +26,7 @@ LIB = -L$(LDIR) -lft -L /usr/local/lib
 
 MLX = -lmlx -framework OpenGL -framework Appkit -lpthread
 
-INC = -I$(IDIR) -I
+INC = -I$(IDIR)
 
 # COLORS
 C_NO = "\033[00m"
