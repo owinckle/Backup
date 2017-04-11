@@ -21,6 +21,7 @@ int	main()
 	vect_set(tmp + 36, 0, -2000, 0); // plan pos
 	vect_set(tmp + 39, 0, 1, 0); // plan nor
 	vect_set(tmp + 42, 0, 0, 2000); // sphere pos
+	vect_set(tmp + 48, 300, 0, 2000); // sphere pos
 	
 	e = env_init();
 	cam_init(e, tmp, tmp + 3);
@@ -31,6 +32,7 @@ int	main()
 	plan_set(e, tmp + 30, tmp + 33, 0);
 	plan_set(e, tmp + 36, tmp + 39, 0);
 	sphere_set(e, tmp + 42, 50, 0xFFFFFF);
+	sphere_set(e, tmp + 48, 50, 0xFFFFFF);
 
 	loop(e);
 	return (0);

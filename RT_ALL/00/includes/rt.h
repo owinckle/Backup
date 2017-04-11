@@ -9,7 +9,7 @@
 # include <pthread.h>
 # include "libft.h"
 
-# define THREAD		5
+# define THREAD		1
 # define MAX_X		500
 # define MAX_Y		500
 # define VP_WIDTH	1.0
@@ -50,7 +50,7 @@
 # define ONZE		49
 # define FAUCON		257
 
-# define PAS		3
+# define PAS		10
 # define MILLENIUM	10
 # define ROT		M_PI / 25
 
