@@ -54,36 +54,36 @@
 # define MILLENIUM	10
 # define ROT		M_PI / 25
 
-typedef struct			s_obj
+typedef struct		s_obj
 {
-	char		*name;
-	float		*ori;
-	float		rad;
-	float		*axe;
-	int		color;
+	char			*name;
+	float			*ori;
+	float			rad;
+	float			*axe;
+	int				color;
 	struct	s_obj	*next;
-}				t_obj;
+}					t_obj;
 
-typedef struct			s_cam
+typedef struct		s_cam
 {
-	float		*pos;
-	float		**base;
-	float		**ray;
-	float		*inter;
-	t_obj		**obj;
-}				t_cam;
+	float			*pos;
+	float			**base;
+	float			**ray;
+	float			*inter;
+	t_obj			**obj;
+}					t_cam;
 
-typedef struct			s_env
+typedef struct		s_env
 {
-	void		*ptr;
-	void		*win;
-	void		*img;
-	char		*data_img;
-	t_cam		*c;
-	t_obj		*o;
-	char		move[13];
-	int			debug;
-}				t_env;
+	void			*ptr;
+	void			*win;
+	void			*img;
+	char			*data_img;
+	t_cam			*c;
+	t_obj			*o;
+	char			move[13];
+	int				debug;
+}					t_env;
 
 typedef struct		s_th_tab
 {
@@ -113,9 +113,9 @@ void	sphere_set(t_env *e, float *pos, float rayon, int color);
 
 //intersection
 
-void			inter(t_env *e, int i);
-void			plan_inter(t_env *e, int i);
-void			sphere_inter(t_env *e, int i);
+void			inter(t_env *e, int i, t_obj *node);
+void			plan_inter(t_env *e, int i, t_obj *node);
+void			sphere_inter(t_env *e, int i, t_obj *node);
 
 //pixel
 

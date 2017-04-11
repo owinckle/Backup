@@ -1,19 +1,19 @@
 #include "rt.h"
 
-static void		set_param(float *param, t_env *e, int i)
+static void		set_param(float *param, t_env *e, int i, t_obj *node)
 {
 	param[0] = pow(e->c->ray[i][0], 2)
 		+ pow(e->c->ray[i][1], 2)
 		+ pow(e->c->ray[i][2], 2);
 	param[1] = 2 * (e->c->ray[i][0]
-			* (e->c->pos[0] - e->o->ori[0])
+			* (e->c->pos[0] - node->ori[0])
 			+ e->c->ray[i][1] * (e->c->pos[1]
-				- e->o->ori[1]) + e->c->ray[i][2]
-			* (e->c->pos[2] - e->o->ori[2]));
+				- node->ori[1]) + e->c->ray[i][2]
+			* (e->c->pos[2] - node->ori[2]));
 	param[2] = pow(e->c->pos[0]
-			- e->o->ori[0], 2) + pow(e->c->pos[1]
-				- e->o->ori[1], 2) + pow(e->c->pos[2]
-					- e->o->ori[2], 2) - pow(e->o->rad, 2);
+			- node->ori[0], 2) + pow(e->c->pos[1]
+				- node->ori[1], 2) + pow(e->c->pos[2]
+					- node->ori[2], 2) - pow(node->rad, 2);
 }
 
 static float	solve(float *param)
@@ -36,16 +36,16 @@ static float	solve(float *param)
 	return (sol);
 }
 
-void				sphere_inter(t_env *e, int i)
+void				sphere_inter(t_env *e, int i, t_obj *node)
 {
 	float	param[3];
 	float	sol;
 
-	set_param(param, e, i);
+	set_param(param, e, i, node);
 	sol = solve(param);
 	if (sol >= 0 && sol <= e->c->inter[i])
 	{
 		e->c->inter[i] = sol;
-		e->c->obj[i] = e->o;
+		e->c->obj[i] = node;
 	}
 }
