@@ -24,7 +24,7 @@ OBJ = $(SRC:.c=.o)
 #INCL = -I includes/ -I /usr/X11/include
 #LIB = -L libft/ -lft -L /usr/X11/lib -lXext -lX11 -lmlx
 INCL = -I includes/ -I /usr/local/include
-LIB = -L libft/ -lft -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
+LIB = -L libft/ -lft -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit -lpthread
 
 all : $(NAME)
 
