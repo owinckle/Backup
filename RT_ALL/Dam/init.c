@@ -45,3 +45,27 @@ void	init_scene(char *path, t_scene *s)
 	if (gnl == -1)
 		error(ERR_DIR);
 }
+
+int				free_scene(t_scene *s)
+{
+	t_ob	*fst_obj;
+	t_ob	*tmp_obj;
+	t_li	*fst_spots;
+	t_li	*tmp_spots;
+
+	fst_obj = s->obj;
+	while (fst_obj != NULL)
+	{
+		tmp_obj = fst_obj->next;
+		free(fst_obj);
+		fst_obj = tmp_obj;
+	}
+	fst_spots = s->spots;
+	while (fst_spots != NULL)
+	{
+		tmp_spots = fst_spots->next;
+		free(fst_spots);
+		fst_spots = tmp_spots;
+	}
+	return (-1);
+}

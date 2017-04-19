@@ -117,12 +117,12 @@ typedef struct	s_env
 	int			l;
 }				t_env;
 
-typedef struct		s_th_tab
+typedef struct	s_th_tab
 {
-	t_env			*e;
-	t_scene			*s;
-	int				i;
-}					t_th_tab;
+	t_env		*e;
+	t_scene		*s;
+	int			i;
+}				t_th_tab;
 
 /*
 **		--- FUNCTIONS ---
@@ -134,6 +134,7 @@ void			error_parsing(int line, char *str);
 
 void			init_scene(char *path, t_scene *s);
 void			init_env(t_env *e);
+int				free_scene(t_scene *s);
 
 void			check_valid(char *line, int *balise, int count, t_scene *s);
 

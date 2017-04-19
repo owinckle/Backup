@@ -50,8 +50,8 @@ t_th			*init_thread(t_env *e)
 
 int				free_lists(t_obj *light, t_obj *obj)
 {
-	t_obj	*fst;
-	t_obj	*tmp;
+	t_ob	*fst;
+	t_ob	*tmp;
 
 	fst = obj;
 	while (fst != NULL)
