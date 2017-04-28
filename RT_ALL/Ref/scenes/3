@@ -1,0 +1,25 @@
+**********
+
++++ CAMERA +++
+pos_x	pos_y	pos_z	vec_x	vec_y	vec_z	up_x	up_y	up_z
+11		7		49		-0.8	-0.5	-1.5		0		1		0	
++++
+
+||| LIGHTS |||
+pos_x	pos_y	pos_z
+5		4		20
+|||
+
+=== OBJECTS ===
+obj_type	pos_x	pos_y	pos_z	r/a		norm_x	norm_y	norm_z	color_r	color_g	color_b	spec
+PLANE		0		0		50		2.5		0		0		-1		230		230		230		0
+PLANE		12		0		0		2.5		-1		0		0		230		230		230		0
+PLANE		-12		0		0		2.5		1		0		0		230		230		230		0
+PLANE		0		10		0		2.5		0		-1		0		230		230		230		0
+PLANE		0		-10		0		2.5		0		1		0		230		230		230		0
+CYLINDER	-3		0		30		0.3		0		1		0		100		100		200		1
+CYLINDER	-3		-2		30		0.3		1		1		1		100		100		200		1
+CYLINDER	-3		-2		30		0.3		1		0		0		100		100		200		1		
+===
+
+**********

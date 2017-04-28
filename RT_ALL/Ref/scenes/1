@@ -1,0 +1,19 @@
+**********
+
++++ CAMERA +++
+pos_x	pos_y	pos_z	vec_x	vec_y	vec_z	up_x	up_y	up_z
+0		0		-20		0		0		1		0		1		0
++++
+
+||| LIGHTS |||
+pos_x	pos_y	pos_z
+0		0		-5
+|||
+
+=== OBJECTS ===
+obj_type	pos_x	pos_y	pos_z	radius	norm_x	norm_y	norm_z	color_r	color_g	color_b	spec
+SPHERE		0		-1		0		1		0		0		0		255		0		255		1
+SPHERE		0		1		0		1		0		0		0		255		255		255		1
+===
+
+**********
