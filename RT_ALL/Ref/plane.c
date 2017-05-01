@@ -20,6 +20,7 @@ void	add_plane(char *line, int count, t_scene *s)
 	count_num(line, 11, count);
 	if (!(plane = (t_ob *)malloc(sizeof(t_ob))))
 		error(ERR_MALLOC);
+	plane->max_ref = 0;
 	plane->pos = get_coord(line, 0);
 	plane->pos = mult_coord(plane->pos, 0.5);
 	plane->normal = vec_norm(get_coord(line, 4));
@@ -49,5 +50,5 @@ double	solve_plane(t_ray ray, t_ob *obj)
 	(ray.origin.z - obj->pos.z) + vec_len(obj->pos)) / \
 	(obj->normal.x * ray.vector.x + obj->normal.y * \
 	ray.vector.y + obj->normal.z * ray.vector.z));
-	return (result);
+	return (result - FLT_EPSILON);
 }

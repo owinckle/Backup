@@ -85,7 +85,6 @@ t_coord	find_color(t_scene *s, t_ob *obj)
 		spots = spots->next;
 	}
 	color = add_coord(color, ambient(obj));
-	color = fix_color(color);
 	return (color);
 }
 
@@ -100,6 +99,8 @@ t_coord		solve(t_ray ray, t_scene *s)
 		return ((t_coord){0, 0, 0});
 	obj->p[0] = translate(ray.origin, ray.vector, dist - 0.0000000001);
 	color = find_color(s, obj);
-	color = add_coord(color, reflection(ray, s, obj));
+	if (obj->spec == 2)
+		color = add_coord(color, reflection(ray, s, obj));
+	color = fix_color(color);
 	return (color);
 }

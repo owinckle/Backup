@@ -15,6 +15,7 @@
 
 # include "libft/libft.h"
 # include "libmath/libmath.h"
+# include <float.h>
 # include <fcntl.h>
 # include <mlx.h>
 
@@ -82,6 +83,7 @@ typedef struct	s_ob
 	double		alpha;
 	int			type;
 	int			num;
+	int			max_ref;
 	struct s_ob	*next;
 }				t_ob;
 

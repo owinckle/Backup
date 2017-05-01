@@ -20,6 +20,7 @@ void	add_sphere(char *line, int count, t_scene *s)
 	count_num(line, 11, count);
 	if (!(sphere = (t_ob *)malloc(sizeof(t_ob))))
 		error(ERR_MALLOC);
+	sphere->max_ref = 0;
 	sphere->pos = get_coord(line, 0);
 	sphere->color = get_coord(line, 7);
 	sphere->radius = get_num(line, 3);

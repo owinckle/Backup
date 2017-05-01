@@ -65,7 +65,6 @@ t_ray	move_ray(t_ray ray, t_ob *obj)
 	t_qt	pos;
 	t_qt	vec;
 
-	ft_putnbr(ray.origin.x);
 	ray.origin = sub_coord(ray.origin, obj->pos);
 	if (obj->type == SPHERE)
 		return (ray);
