@@ -101,6 +101,8 @@ t_coord		solve(t_ray ray, t_scene *s)
 	color = find_color(s, obj);
 	if (obj->spec == 2)
 		color = add_coord(color, reflection(ray, s, obj));
+	if (obj->spec == 3)
+		color = add_coord(color, refraction(ray, s, obj));
 	color = fix_color(color);
 	return (color);
 }

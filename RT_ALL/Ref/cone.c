@@ -80,5 +80,5 @@ double	solve_cone(t_ray r, t_ob *obj, int ok)
 	if (ok)
 		obj->p[1] = \
 		translate(r.origin, vec_norm(r.vector), v.result - 0.0000000001);
-	return (v.result);
+	return (v.result - FLT_EPSILON);
 }

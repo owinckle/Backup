@@ -19,7 +19,7 @@ t_coord		filter(int filter)
 	color = blacked();
 	if (filter == SEPIA)
 		color = mult_coord(add_coord(color, (t_coord){112, 66, 20}), 1);
-	else if (filter == COLD)
-		color = mult_coord(add_coord(color, (t_coord){0, 109, 255}), 1);
+	else if (filter == ICE)
+		color = mult_coord(add_coord(color, (t_coord){0, 109, 255}), 0.5);
 	return (color);
 }

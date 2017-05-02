@@ -21,6 +21,7 @@ void	add_sphere(char *line, int count, t_scene *s)
 	if (!(sphere = (t_ob *)malloc(sizeof(t_ob))))
 		error(ERR_MALLOC);
 	sphere->max_ref = 0;
+	sphere->max_refr = 0;
 	sphere->pos = get_coord(line, 0);
 	sphere->color = get_coord(line, 7);
 	sphere->radius = get_num(line, 3);
@@ -59,5 +60,5 @@ double	solve_sphere(t_ray r, t_ob *obj, int ok)
 		v.result = v.second;
 	if (ok)
 		obj->p[1] = translate(r.origin, r.vector, v.result - 0.0000000001);
-	return (v.result);
+	return (v.result - FLT_EPSILON);
 }

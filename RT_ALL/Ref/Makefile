@@ -28,15 +28,16 @@ SRC = main.c\
 	  color.c\
 	  normal.c\
 	  o_reflect.c\
-	  o_filter.c
+	  o_filter.c\
+	  o_refraction.c
 
 OBJ = $(SRC:.c=.o)
 
-CC = clang
+CC = clang -I /usr/local/include
 
 CFLAGS = -Wall -Wextra -Werror
 
-MLX_FLAGS = -lmlx -framework Opengl -framework Appkit
+MLX_FLAGS = -L /usr/local/lib -lmlx -framework Opengl -framework Appkit
 
 LIBFT = libft/libft.a
 

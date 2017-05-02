@@ -14,7 +14,8 @@
 
 void	info(t_scene s, char **av)
 {
-	ft_putstr("\x1b[36m[Options]\nFilter : ");
+	ft_putstr(ft_strjoin("\x1b[36m[\x1b[32mRT Parapluie\x1b[36m]\nScene path : \x1b[32m", av[1]));
+	ft_putstr("\x1b[36m\nFilter : ");
 	if (s.filter == 0)
 		ft_putendl("\x1b[32mNone");
 	else
@@ -64,7 +65,7 @@ int		main(int ac, char **av)
 	s.filter = 0;
 	if (ac == 3 && !ft_strcmp("sepia", av[2]))
 		s.filter = 1;
-	else if (ac == 3 && !ft_strcmp("cold", av[2]))
+	else if (ac == 3 && !ft_strcmp("ice", av[2]))
 		s.filter = 2;
 	if (ac < 2)
 		error(ERR_AC);

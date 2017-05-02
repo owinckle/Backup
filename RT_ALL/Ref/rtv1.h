@@ -24,7 +24,7 @@
 
 # define MAX_DIST 200.0
 
-# define BACKGROUND_COLOR 0x000000
+# define BACKGROUND_COLOR 0xff00ff
 
 # define AMBIENT 0.1
 # define DIFFUSE 0.3
@@ -49,7 +49,7 @@
 # define ERR_MALLOC "Malloc failed miserably !\n"
 
 # define SEPIA 1
-# define COLD 2
+# define ICE 2
 
 /*
 **		--- STRUCTURES ---
@@ -87,6 +87,7 @@ typedef struct	s_ob
 	int			type;
 	int			num;
 	int			max_ref;
+	int			max_refr;
 	struct s_ob	*next;
 }				t_ob;
 
@@ -170,9 +171,11 @@ t_coord			get_normal(t_ob *obj);
 t_coord			cylinder_normal(t_ob *obj);
 t_coord			cone_normal(t_ob *obj);
 
+
 /*
 ** Ocean 
 */
+t_coord		refraction(t_ray ray, t_scene *s, t_ob *obj);
 t_coord		filter(int filter);
 t_coord		reflection(t_ray ray, t_scene *s, t_ob *obj);
 void		ft_bs(int c, char *s, int nl);

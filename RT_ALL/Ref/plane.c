@@ -21,6 +21,7 @@ void	add_plane(char *line, int count, t_scene *s)
 	if (!(plane = (t_ob *)malloc(sizeof(t_ob))))
 		error(ERR_MALLOC);
 	plane->max_ref = 0;
+	plane->max_refr = 0;
 	plane->pos = get_coord(line, 0);
 	plane->pos = mult_coord(plane->pos, 0.5);
 	plane->normal = vec_norm(get_coord(line, 4));
