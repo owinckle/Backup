@@ -70,7 +70,7 @@ t_coord	find_color(t_scene *s, t_ob *obj)
 	double	d;
 
 	spots = s->spots;
-	color = blacked();
+	color = filter(s->filter);
 	while (spots)
 	{
 		d = vec_len(sub_coord(obj->p[0], spots->pos));

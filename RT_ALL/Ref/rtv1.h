@@ -48,6 +48,9 @@
 # define ERR_VOID "Can't read file !\n"
 # define ERR_MALLOC "Malloc failed miserably !\n"
 
+# define SEPIA 1
+# define COLD 2
+
 /*
 **		--- STRUCTURES ---
 */
@@ -104,6 +107,7 @@ typedef struct	s_scene
 	t_cam		cam;
 	t_li		*spots;
 	t_ob		*obj;
+	int			filter;
 }				t_scene;
 
 typedef struct	s_env
@@ -167,7 +171,9 @@ t_coord			cylinder_normal(t_ob *obj);
 t_coord			cone_normal(t_ob *obj);
 
 /*
-** Reflection 
+** Ocean 
 */
+t_coord		filter(int filter);
 t_coord		reflection(t_ray ray, t_scene *s, t_ob *obj);
+void		ft_bs(int c, char *s, int nl);
 #endif

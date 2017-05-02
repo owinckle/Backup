@@ -27,7 +27,8 @@ SRC = main.c\
 	  cone.c\
 	  color.c\
 	  normal.c\
-	  o_reflect.c
+	  o_reflect.c\
+	  o_filter.c
 
 OBJ = $(SRC:.c=.o)
 
