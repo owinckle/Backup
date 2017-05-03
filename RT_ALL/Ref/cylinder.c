@@ -34,6 +34,8 @@ void	add_cylinder(char *line, int count, t_scene *s)
 	count_num(line, 11, count);
 	if (!(cylinder = (t_ob *)malloc(sizeof(t_ob))))
 		error(ERR_MALLOC);
+	cylinder->max_ref = 0;
+	cylinder->max_refr = 0;
 	cylinder->pos = get_coord(line, 0);
 	cylinder->normal = vec_norm(get_coord(line, 4));
 	cylinder->rot = compute_rot_qt(cylinder->normal);

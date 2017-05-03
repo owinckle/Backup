@@ -19,16 +19,16 @@ t_coord		vect_refr(t_coord normal, t_coord dir)
 	t_coord ref;
 
 	calc[0] = dot(normal, dir);
-	if (calc[0] > 0.0)
+	if (calc[0] > 0)
 	{
-		n[1] = 1;
-		n[2] = 1.5; //Verre
+		n[1] = 2.5;
+		n[2] = 1;
 		mult_coord(normal, -1.0);
 	}
 	else
 	{
-		n[1] = 1.5;
-		n[2] = 1;
+		n[2] = 2.5;
+		n[1] = 1;
 		calc[0] = -calc[0];
 	}
 	n[0] = n[1] / n[2];
@@ -36,7 +36,7 @@ t_coord		vect_refr(t_coord normal, t_coord dir)
 	calc[1] = sqrt(1.0 - calc[2]);
 	ref = add_coord(mult_coord(dir, n[0]), mult_coord(normal, (n[0] * calc[0] - calc[1])));
 	ref = vec_norm(ref);
-	return (dir);
+	return (ref);
 }
 
 t_coord		refraction(t_ray ray, t_scene *s, t_ob *obj)

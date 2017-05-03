@@ -85,7 +85,22 @@ t_coord	find_color(t_scene *s, t_ob *obj)
 		spots = spots->next;
 	}
 	color = add_coord(color, ambient(obj));
+	color = fix_color(color);
 	return (color);
+}
+
+t_coord		ref_refr(t_ray ray, t_scene *s, t_ob *obj)
+{
+	t_coord		c_reflection;
+	t_coord		c_refraction;
+
+	c_refraction = blacked();
+	c_reflection = blacked();
+	if (obj->spec == 2)
+		c_reflection = reflection(ray, s, obj);
+	if (obj->spec == 3)
+		c_refraction = refraction(ray, s, obj);
+	return (add_coord(c_refraction, c_reflection));
 }
 
 t_coord		solve(t_ray ray, t_scene *s)
@@ -99,10 +114,7 @@ t_coord		solve(t_ray ray, t_scene *s)
 		return ((t_coord){0, 0, 0});
 	obj->p[0] = translate(ray.origin, ray.vector, dist - 0.0000000001);
 	color = find_color(s, obj);
-	if (obj->spec == 2)
-		color = add_coord(color, reflection(ray, s, obj));
-	if (obj->spec == 3)
-		color = add_coord(color, refraction(ray, s, obj));
-	color = fix_color(color);
+	if (obj->spec > 1)
+		color = fix_color(add_coord(color, ref_refr(ray, s, obj)));
 	return (color);
 }

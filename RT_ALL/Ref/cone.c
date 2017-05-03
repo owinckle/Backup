@@ -37,6 +37,8 @@ void	add_cone(char *line, int count, t_scene *s)
 	count_num(line, 11, count);
 	if (!(cone = (t_ob *)malloc(sizeof(t_ob))))
 		error(ERR_MALLOC);
+	cone->max_ref = 0;
+	cone->max_refr = 0;
 	cone->pos = get_coord(line, 0);
 	cone->radius = (get_num(line, 3) / 180 * M_PI);
 	cone->normal = vec_norm(get_coord(line, 4));
