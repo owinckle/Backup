@@ -48,18 +48,10 @@ t_ob	*find_inter(t_ray ray, t_ob *obj, double *dist, int ok)
 
 t_coord	fix_color(t_coord color)
 {
-	t_coord	fix;
-
-	fix.x = color.x;
-	fix.y = color.y;
-	fix.z = color.z;
-	if (color.x > 255)
-		fix.x = 255;
-	if (color.y > 255)
-		fix.y = 255;
-	if (color.z > 255)
-		fix.z = 255;
-	return (fix);
+	color.x = color.x > 255 ? 255 : color.x;
+	color.y = color.y > 255 ? 255 : color.y;
+	color.z = color.z > 255 ? 255 : color.z;
+	return (color);
 }
 
 t_coord	find_color(t_scene *s, t_ob *obj)
