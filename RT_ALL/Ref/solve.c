@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
+#include <stdio.h>
 
 double	intersect(t_ray ray, t_ob *obj, int ok)
 {
@@ -86,16 +87,21 @@ t_coord	find_color(t_scene *s, t_ob *obj)
 
 t_coord		ref_refr(t_ray ray, t_scene *s, t_ob *obj)
 {
-	t_coord		c_reflection;
-	t_coord		c_refraction;
+	t_coord		c_ref_refr;
+	t_coord		c_transparent;
 
-	c_refraction = blacked();
-	c_reflection = blacked();
+	c_ref_refr = blacked();
+	c_transparent = mult_coord(obj->color, 0.15);
 	if (obj->spec == 2)
-		c_reflection = reflection(ray, s, obj);
+		c_ref_refr = reflection(ray, s, obj);
 	if (obj->spec == 3)
-		c_refraction = refraction(ray, s, obj);
-	return (add_coord(c_refraction, c_reflection));
+		c_ref_refr = refraction(ray, s, obj);
+	if (obj->spec == 4)
+	{
+		ray.origin = obj->p[0];
+		c_ref_refr = add_coord(c_transparent, solve(ray, s));
+	}
+	return (c_ref_refr);
 }
 
 t_coord		solve(t_ray ray, t_scene *s)
