@@ -34,7 +34,7 @@ t_coord		reflection(t_ray ray, t_scene *s, t_ob *obj)
 		ray.origin = obj->p[0];
 		ray.vector = vect_ref(ray.vector, normal);
 		color = add_coord(color, solve(ray, s));
-		color = mult_coord(color, 0.15);
+		color = mult_coord(color, 0.5);
 	}
 	if (obj->max_ref == 1)
 		obj->max_ref = 0;

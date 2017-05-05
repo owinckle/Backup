@@ -76,10 +76,9 @@ t_coord	find_color(t_scene *s, t_ob *obj)
 		}
 		spots = spots->next;
 	}
-	if (obj->spec != 3) {
+	if (obj->spec != 3)
 		color = add_coord(color, ambient(obj));
-		color = fix_color(color);
-	}
+	color = fix_color(color);
 			
 
 	return (color);
@@ -108,7 +107,9 @@ t_coord		solve(t_ray ray, t_scene *s)
 	dist = MAX_DIST;
 	if ((obj = find_inter(ray, s->obj, &dist, 1)) == NULL)
 		return ((t_coord){0, 0, 0});
-	obj->p[0] = translate(ray.origin, ray.vector, dist - 0.0000000001);
+	obj->p[0] = translate(ray.origin, ray.vector, dist - 0.001);
+	if (obj->spec == 3)
+		obj->p[0] = translate(ray.origin, ray.vector, dist - 0.000000000001);
 	color = find_color(s, obj);
 	if (obj->spec > 1)
 		color = fix_color(add_coord(color, ref_refr(ray, s, obj)));

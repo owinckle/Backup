@@ -13,7 +13,7 @@ pos_x	pos_y	pos_z
 === OBJECTS ===
 obj_type	pos_x	pos_y	pos_z	r/a		norm_x	norm_y	norm_z	color_r	color_g	color_b	spec
 SPHERE		0		0		5		1		0		0		0		255		100		100		2
-SPHERE		1		0.3		0		1.5		0		0		0		255		255		255		3
+SPHERE		-1		2		0		1.5		0		0		0		255		255		255		3
 PLANE		0		-1		0		2.5		0		1		0		100		124		250		2
 CONE		-2.7	1		2		5		-0.6	1		0		250		250		42		2
 CYLINDER	-4		0		40		1.5		0		0		1		100		100		100		2
