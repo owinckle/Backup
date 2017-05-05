@@ -21,14 +21,14 @@ t_coord		vect_refr(t_coord normal, t_coord dir)
 	calc[0] = dot(normal, dir);
 	if (calc[0] > 0)
 	{
-		n[1] = 2.5;
-		n[2] = 1;
+		n[1] = 0.5;
+		n[2] = 0;
 		mult_coord(normal, -1.0);
 	}
 	else
 	{
-		n[2] = 2.5;
-		n[1] = 1;
+		n[2] = 0.5;
+		n[1] = 0;
 		calc[0] = -calc[0];
 	}
 	n[0] = n[1] / n[2];

@@ -63,7 +63,7 @@ t_coord	find_color(t_scene *s, t_ob *obj)
 
 	spots = s->spots;
 	color = filter(s->filter);
-	while (spots)
+	while (spots && obj->spec != 3)
 	{
 		d = vec_len(sub_coord(obj->p[0], spots->pos));
 		shad.origin = obj->p[0];
@@ -76,8 +76,12 @@ t_coord	find_color(t_scene *s, t_ob *obj)
 		}
 		spots = spots->next;
 	}
-	color = add_coord(color, ambient(obj));
-	color = fix_color(color);
+	if (obj->spec != 3) {
+		color = add_coord(color, ambient(obj));
+		color = fix_color(color);
+	}
+			
+
 	return (color);
 }
 
