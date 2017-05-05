@@ -29,7 +29,8 @@ SRC = main.c\
 	  normal.c\
 	  o_reflect.c\
 	  o_filter.c\
-	  o_refraction.c
+	  o_refraction.c\
+	  o_transparent.c
 
 OBJ = $(SRC:.c=.o)
 

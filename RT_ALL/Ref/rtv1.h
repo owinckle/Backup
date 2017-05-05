@@ -179,4 +179,5 @@ t_coord		refraction(t_ray ray, t_scene *s, t_ob *obj);
 t_coord		filter(int filter);
 t_coord		reflection(t_ray ray, t_scene *s, t_ob *obj);
 void		ft_bs(int c, char *s, int nl);
+t_coord		transparent(t_ray ray, t_scene *s, t_ob *obj, t_coord col);
 #endif
