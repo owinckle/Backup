@@ -20,6 +20,6 @@ t_coord		filter(int filter)
 	if (filter == SEPIA)
 		color = mult_coord(add_coord(color, (t_coord){112, 66, 20}), 0.5);
 	else if (filter == ICE)
-		color = mult_coord(add_coord(color, (t_coord){0, 109, 255}), 0.5);
+		color = mult_coord(add_coord(color, (t_coord){0, 90, 180}), 0.5);
 	return (color);
 }
