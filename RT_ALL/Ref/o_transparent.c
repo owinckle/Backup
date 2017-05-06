@@ -17,7 +17,7 @@ t_coord		transparent(t_ray ray, t_scene *s, t_ob *obj, t_coord col)
 	t_coord		color;
 	double		t_i;
 
-	t_i = 0.05;
+	t_i = 0.5;
 	color = mult_coord(col, t_i);
 	if (obj->max_ref < 1 && t_i < 1)
 	{

@@ -78,7 +78,7 @@ t_coord	find_color(t_scene *s, t_ob *obj)
 		else if (tmp->spec == 4)
 		{
 			color = add_coord(color, diffuse(shad, obj, d));
-			color = mult_coord(color, 0.05);
+			color = mult_coord(color, 0.5);
 			if (obj->spec)
 				color = add_coord(color, specular(shad, obj, s->cam, d));
 		}
