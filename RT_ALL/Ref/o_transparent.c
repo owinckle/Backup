@@ -15,12 +15,14 @@
 t_coord		transparent(t_ray ray, t_scene *s, t_ob *obj, t_coord col)
 {
 	t_coord		color;
+	double		t_i;
 
-	color = mult_coord(col, 0.1);
-	if (obj->max_ref < 1)
+	t_i = 0.05;
+	color = mult_coord(col, t_i);
+	if (obj->max_ref < 1 && t_i < 1)
 	{
 		obj->max_ref++;
-		ray.origin = obj->p[1];
+		ray.origin = obj->p[0];
 		color = add_coord(color, solve(ray, s));
 	}
 	if (obj->max_ref == 1)

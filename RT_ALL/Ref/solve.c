@@ -60,6 +60,7 @@ t_coord	find_color(t_scene *s, t_ob *obj)
 	t_ray	shad;
 	t_li	*spots;
 	double	d;
+	t_ob	*tmp;
 
 	spots = s->spots;
 	color = filter(s->filter);
@@ -68,9 +69,16 @@ t_coord	find_color(t_scene *s, t_ob *obj)
 		d = vec_len(sub_coord(obj->p[0], spots->pos));
 		shad.origin = obj->p[0];
 		shad.vector = vec_norm(sub_coord(spots->pos, obj->p[0]));
-		if (!find_inter(shad, s->obj, &d, 0))
+		if ((tmp = find_inter(shad, s->obj, &d, 0)) == NULL)
 		{
 			color = add_coord(color, diffuse(shad, obj, d));
+			if (obj->spec)
+				color = add_coord(color, specular(shad, obj, s->cam, d));
+		}
+		else if (tmp->spec == 4)
+		{
+			color = add_coord(color, diffuse(shad, obj, d));
+			color = mult_coord(color, 0.05);
 			if (obj->spec)
 				color = add_coord(color, specular(shad, obj, s->cam, d));
 		}
@@ -114,6 +122,8 @@ t_coord		solve(t_ray ray, t_scene *s)
 	obj->p[0] = translate(ray.origin, ray.vector, dist - 0.001);
 	if (obj->spec == 3)
 		obj->p[0] = translate(ray.origin, ray.vector, dist - 0.000000000001);
+	else if (obj->spec == 4)
+		obj->p[0] = translate(ray.origin, ray.vector, (dist + FLT_EPSILON) - 0.0000000001);
 	color = find_color(s, obj);
 	if (obj->spec > 1)
 		color = fix_color(add_coord(color, ref_refr(ray, s, obj, color)));
