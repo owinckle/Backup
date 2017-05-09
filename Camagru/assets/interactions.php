@@ -62,7 +62,7 @@ function commentSend($user, $comment, $image ,$db) {
 	}
 
 	$subject 		= "Someone commented your montage !";
-	$link 			= "http://127.0.0.1:8080/camagru/comments?image=" . $image;
+	$link 			= "http://127.0.0.1:8080/comments?image=" . $image;
 	$body 			= "Hi !\nsomeone just commented one of your montages, check it out here : " . $link;
 	$from 			= "no-reply@born2selfie.com";
 	$headers 		= 'From:' . $from;

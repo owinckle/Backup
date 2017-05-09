@@ -7,7 +7,7 @@ function vMail($username, $email, $vHash) {
 	$token = hash("whirlpool", $vHash . $salt);
 	$subject = "Email Verification for Born2Selfie";
 	$from = "no-reply@born2selfie.com";
-	$body = "Hi " . $username . ",\nthank you for registering at Born2Selfie ! To log in on our site, please verify your email by clicking on the link below.\nhttp://127.0.0.1:8080/camagru/auth/verification?email=" . $email . "&token=" . $token;
+	$body = "Hi " . $username . ",\nthank you for registering at Born2Selfie ! To log in on our site, please verify your email by clicking on the link below.\nhttp://127.0.0.1:8080/auth/verification?email=" . $email . "&token=" . $token;
 	$headers = 'From:' . $from;
 	mail($email,$subject,$body,$headers);
 }

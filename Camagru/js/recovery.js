@@ -17,11 +17,12 @@ button.addEventListener("click", function() {
 		input.value 			= "";
 
 		var xhr_code = new XMLHttpRequest();
+		var mailcode = new FormData();
+		mailcode.append('action', 'mailCode');
+		mailcode.append('email', email);
+		mailcode.append('code', code);
 		xhr_code.open('POST', 'ajax.php');
-		xhr_code.send('action=mailCode' +
-			'&email=' + email +
-			'&code=' + code);
-		
+		xhr_code.send(mailcode);
 		setTimeout(function () {
 			button.style.background 	= "rgb(52, 138, 42)";
 			button.value			 	= "Sent";
@@ -62,10 +63,12 @@ button.addEventListener("click", function() {
 		var password 	= input.value;
 
 		var xhr_confirm = new XMLHttpRequest();
+		var changepass = new FormData();
+		changepass.append('action', 'changePass');
+		changepass.append('email', email);
+		changepass.append('password', password);
 		xhr_confirm.open('POST', 'ajax.php');
-		xhr_confirm.send('action=changePass' +
-			'&email=' + email +
-			'&password=' + password);
+		xhr_confirm.send(changepass);
 		xhr_confirm.onreadystatechange = function () {
 		  var DONE = 4;
 		  var OK = 200;
@@ -133,5 +136,4 @@ button.addEventListener("click", function() {
 		    }
 		  }
 		};
-	}
-});
+	});
