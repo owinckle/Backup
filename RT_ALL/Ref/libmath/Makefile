@@ -30,7 +30,7 @@ OBJ = $(SRC:.c=.o)
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -O3
 
 all : $(NAME)
 	@echo "\033[32m◊\033[0m libmath ready"

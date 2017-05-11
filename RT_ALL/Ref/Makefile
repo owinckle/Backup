@@ -36,7 +36,7 @@ OBJ = $(SRC:.c=.o)
 
 CC = clang -I /usr/local/include
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -O3
 
 MLX_FLAGS = -L /usr/local/lib -lmlx -framework Opengl -framework Appkit
 
