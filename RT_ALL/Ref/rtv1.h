@@ -22,7 +22,7 @@
 # define WIDTH 1200.0
 # define HEIGHT 800.0
 
-# define MAX_DIST 200.0
+# define MAX_DIST 500.0
 
 # define BACKGROUND_COLOR 0xff00ff
 
