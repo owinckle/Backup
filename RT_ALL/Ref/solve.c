@@ -72,15 +72,15 @@ t_coord	find_color(t_scene *s, t_ob *obj)
 		if ((tmp = find_inter(shad, s->obj, &d, 0)) == NULL)
 		{
 			color = add_coord(color, diffuse(shad, obj, d));
-			if (obj->spec)
-				color = add_coord(color, specular(shad, obj, s->cam, d));
+			// if (obj->spec)
+			// 	color = add_coord(color, specular(shad, obj, s->cam, d));
 		}
 		else if (tmp->spec == 4)
 		{
 			color = add_coord(color, diffuse(shad, obj, d));
 			color = mult_coord(color, 0.5);
-			if (obj->spec)
-				color = add_coord(color, specular(shad, obj, s->cam, d));
+			// if (obj->spec)
+			// 	color = add_coord(color, specular(shad, obj, s->cam, d));
 		}
 		spots = spots->next;
 	}
