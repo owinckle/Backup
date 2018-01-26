@@ -48,9 +48,16 @@ static void	width_precision(t_env *e)
 static void	conversion(t_env *e)
 {
 	e->c = *e->format;
-	// if (e->c == 's')
-	if (ft_strchr("dDi", e->c))
+	if (e->c == 's')
+		(e->f & F_LONG || e->f & F_LONG2) ? ftpf_putwstr(e) : ftpf_putstr(e);
+	else if (ft_strchr("dDi", e->c))
 		ftpf_putnb(e);
+	else if (e->c == 'c' || e->c == 'C')
+		ftpf_character(e, va_arg(e->ap, unsigned));
+	else if (e->c == 'S')
+		ftpf_putwstr(e);
+	else if (e->c == 'p')
+		ftpf_pt_address(e);
 }
 
 void		parse(t_env *e)

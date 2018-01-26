@@ -62,11 +62,12 @@ int		ft_printf(const char * restrict format, ...)
 
 int	 main(int ac, char **av)
 {
-	// ft_printf("J'aime les %s!", "chats");
+	//Bug sur e.len (nombre de char affichés :
+	//Toujours 1 en trop, et met des nombres random si y'a plus de 3 parametres)
+	int i = ft_printf("J'aime les %s et le %c! Address : %p et %p\n", "chats", 'c', "fdp", 1);
+	int n = printf("J'aime les %s et le %c! Address : %p et %p\n", "chats", 'c', "fdp", 1);
 
-	
-
-	int i = ft_printf("J'ai %d %d ans!\n", 123, 456);
-	printf("[%d]", i); //13 print : 11 affiché
+	printf("Ft :[%d]\n", i);
+	printf("LibC :[%d]\n", n);
 	return (0);
 }

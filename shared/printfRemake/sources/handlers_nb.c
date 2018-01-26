@@ -18,11 +18,11 @@ void	ftpf_putnb(t_env *e)
 	else
 		n = ((intmax_t)va_arg(e->ap, int));
 	(e->f & F_ZERO) ? e->precision = e->min_length : 0;
-	ftpf_itoabase(n, e, 0);
+	ftpf_itoa(n, e, 0);
 
 }
 
-void	ftpf_itoabase(intmax_t n, t_env *e, int len)
+void	ftpf_itoa(intmax_t n, t_env *e, int len)
 {
 	char		s[21];
 	uintmax_t	tmp;
@@ -45,6 +45,35 @@ void	ftpf_itoabase(intmax_t n, t_env *e, int len)
 	(e->f & F_SPACE) ? s[0] =  ' ' : 0;
 	(n < 0) ? s[0] = '-' : 0;
 	(e->f & F_PLUS && n >= 0) ? s[0] = '+' : 0;
+	buffer(e, s, e->printed);
+	padding(e, 1);
+}
+
+void	ftpf_itoabase(uintmax_t n, int b, t_env *e)
+{
+	uintmax_t	tmp;
+	char		s[21];
+	int			ext;
+
+	e->printed = 0;
+	tmp = n;
+	while (tmp && ++e->printed)
+		tmp /= b;
+	(e->f & F_ZERO) ? e->precision = e->min_length : 0;
+	ext = (e->printed >= e->precision) ? 0 : 1;
+	e->printed = MAX(e->precision, e->printed);
+	((e->f & F_SHARP) && b == 8 && !ext) ? --e->min_length : 0;
+	((e->f & F_SHARP) && b == 8 && !n && (e->f & F_APP_PRECI)) ?
+		++e->printed : 0;
+	((e->f & F_SHARP) && b == 16 && !(e->f & F_ZERO)) ? e->min_length -= 2 : 0;
+	e->padding = MAX(0, (e->min_length - e->printed));
+	padding(e, 0);
+	if ((n || (e->f & F_POINTER))
+		&& (e->f & F_SHARP) && ((b == 8 && !ext) || (b == 16)))
+		buffer(e, "0", 1);
+	if ((n || (e->f & F_POINTER)) && (e->f & F_SHARP) && b == 16)
+		buffer(e, (e->f & F_UPCASE) ? "X" : "x", 1);
+	ftpf_ibasefill(n, b, s, e);
 	buffer(e, s, e->printed);
 	padding(e, 1);
 }
