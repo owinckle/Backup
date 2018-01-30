@@ -42,6 +42,7 @@ int		ft_printf(const char * restrict format, ...)
 
 	e.format = (char *)format;
 	e.len = 0;
+	e.buffer_index = 0;
 	va_start(e.ap, format);
 	while (*e.format)
 	{
@@ -63,8 +64,8 @@ int		ft_printf(const char * restrict format, ...)
 
 int	 main(int ac, char **av)
 {
-	int i = ft_printf("%%\n");
-	int n = printf("%%\n");
+	int i = ft_printf("Salut\n");
+	int n = printf("Salut\n");
 
 	printf("Ft: [%d]\n", i);
 	printf("LibC: [%d]\n", n);
