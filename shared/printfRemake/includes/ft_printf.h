@@ -11,8 +11,8 @@
 /*
 ** Macros
 */
-# define MAX(a, b)		b & ((a - b) >> 31) | a & (~(a - b) >> 31)
-# define MIN(a, b)		a & ((a - b) >> 31) | b & (~(a - b) >> 31)
+# define MAX(a, b)		(b & ((a - b) >> 31)) | (a & (~(a - b) >> 31))
+# define MIN(a, b)		(a & ((a - b) >> 31)) | (b & (~(a - b) >> 31))
 # define ABS(a)			(a < 0) ? -a : a
 
 /*
@@ -65,6 +65,7 @@ void	ftpf_putnb(t_env *e);
 void	ftpf_itoa(intmax_t n, t_env *e, int len);
 void	ftpf_ibasefill(uintmax_t tmp, int b, char s[BUF_SIZE], t_env *e);
 void	ftpf_itoabase(uintmax_t n, int b, t_env *e);
+void	ftpf_putnb_base(int base, t_env *e);
 
 void	ftpf_putwchar(t_env *e, unsigned int wc, int wlen, int nb_bytes);
 void	ftpf_putwstr(t_env *e);
@@ -83,5 +84,7 @@ char	*ft_strchr(const char *s, int c);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 size_t	ft_strlen(const char *s);
 size_t	ft_wstrlen(unsigned *s);
+int		ft_strchri_base(char *s, int c, int i);
+
 
 #endif

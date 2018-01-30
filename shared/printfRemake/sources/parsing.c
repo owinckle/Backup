@@ -9,7 +9,7 @@ static void	flags(t_env *e)
 	(e->f & F_PLUS) ? e->f &= ~F_SPACE : 0;
 	if (e->f & F_WILDCARD)
 	{
-		e->f & F_WILDCARD;
+		e->f &= ~F_WILDCARD;
 		if ((e->n = (int)va_arg(e->ap, int)) < 0)
 		{
 			e->f |= F_MINUS;
@@ -58,6 +58,9 @@ static void	conversion(t_env *e)
 		ftpf_putwstr(e);
 	else if (e->c == 'p')
 		ftpf_pt_address(e);
+	else if (ft_strchr("oOuUxX", e->c))
+		ftpf_putnb_base(ft_strchri_base("....ou..x", e->c, -1) << 1, e);
+
 }
 
 void		parse(t_env *e)
@@ -83,7 +86,7 @@ void		parse(t_env *e)
 	}
 	flags(e);
 	(e->f & F_PLUS) ? e->f &= ~F_SPACE : 0;
-	if (ft_strchr("CDSUOBX", *e->format))
+	if (ft_strchr("CDSUOX", *e->format))
 		e->f |= (*e->format != 'X') ? F_LONG : F_UPCASE;
 	conversion(e);
 }

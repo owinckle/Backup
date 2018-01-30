@@ -22,3 +22,12 @@ size_t		ft_wstrlen(unsigned *s)
 	}
 	return (len);
 }
+
+int		ft_strchri_base(char *s, int c, int i)
+{
+	i = -1;
+	while (s[++i])
+		if (s[i] == c || s[i] == c + 32)
+			return (i);
+	return (-1);
+}

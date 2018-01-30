@@ -41,7 +41,7 @@ void			ftpf_putwstr(t_env *e)
 	{
 		wlen = (int)(ft_wstrlen((unsigned *)s));
 		(e->f & F_APP_PRECI) ? wlen = MIN(e->precision, wlen) : 0;
-		e->padding = MAX(e->min_length - wlen, 0);
+		e->padding = MAX((e->min_length - wlen), 0);
 		if (e->precision == 4 && e->min_length == 15 && wlen == 4)
 			++e->padding;
 		e->f = (e->min_length > e->precision) ?

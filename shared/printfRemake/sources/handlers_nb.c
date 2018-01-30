@@ -22,6 +22,26 @@ void	ftpf_putnb(t_env *e)
 
 }
 
+void	ftpf_putnb_base(int base, t_env *e)
+{
+	uintmax_t	n;
+
+	if (e->f & F_LONG || e->f & F_LONG2)
+		n = (e->f & F_LONG2) ? ((intmax_t)va_arg(e->ap, unsigned long long)) :
+			((intmax_t)va_arg(e->ap, unsigned long));
+	else if (e->f & F_SHORT || e->f & F_SHORT2)
+		n = (e->f & F_SHORT2) ? (uintmax_t)((unsigned char)va_arg(e->ap, int)) :
+			(uintmax_t)((unsigned short)va_arg(e->ap, int));
+	else if (e->f & F_INTMAX)
+		n = (va_arg(e->ap, uintmax_t));
+	else if (e->f & F_SIZE_T)
+		n = (uintmax_t)va_arg(e->ap, size_t);
+	else
+		n = (uintmax_t)va_arg(e->ap, unsigned int);
+	ftpf_itoabase(n, base, e);
+
+}
+
 void	ftpf_itoa(intmax_t n, t_env *e, int len)
 {
 	char		s[21];
