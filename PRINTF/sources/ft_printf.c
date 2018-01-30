@@ -63,10 +63,10 @@ int		ft_printf(const char * restrict format, ...)
 
 int	 main(int ac, char **av)
 {
-	int i = ft_printf("%0i\n", "TotoTotoTotoToto");
-	int n = printf("%0i\n", "TotoTotoTotoToto");
+	int i = ft_printf("%%\n");
+	int n = printf("%%\n");
 
-	printf("Ft :[%d]\n", i);
-	printf("LibC :[%d]\n", n);
+	printf("Ft: [%d]\n", i);
+	printf("LibC: [%d]\n", n);
 	return (0);
 }

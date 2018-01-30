@@ -60,6 +60,8 @@ static void	conversion(t_env *e)
 		ftpf_pt_address(e);
 	else if (ft_strchr("oOuUxX", e->c))
 		ftpf_putnb_base(ft_strchri_base("....ou..x", e->c, -1) << 1, e);
+	else if (e->c == '%')
+		ftpf_character(e, '%');
 
 }
 
