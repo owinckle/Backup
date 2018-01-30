@@ -39,4 +39,4 @@ clean:
 fclean: clean
 	@rm -rf $(NAME)
 
-re: fclean all
+re: clean fclean all
