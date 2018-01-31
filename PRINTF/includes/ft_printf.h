@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: owinckle <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/31 12:45:40 by owinckle          #+#    #+#             */
+/*   Updated: 2018/01/31 12:45:41 by owinckle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
@@ -38,53 +50,54 @@
 /*
 ** Structure
 */
-typedef	struct	s_env
+typedef	struct			s_env
 {
-	int			len;
-	short		f;
-	short		n;
-	int			min_length;
-	int			precision;
-	int			padding;
-	int			printed;
-	va_list		ap;
-	char		*format;
-	unsigned	c;
-	int			buffer_index;
-	char		buff[BUF_SIZE];
-}				t_env;
+	int					len;
+	short				f;
+	short				n;
+	int					min_length;
+	int					precision;
+	int					padding;
+	int					printed;
+	va_list				ap;
+	char				*format;
+	unsigned			c;
+	int					buffer_index;
+	char				buff[BUF_SIZE];
+}						t_env;
 
 /*
 ** Functions
 */
-int		ft_printf(const char * restrict format, ...);
-void	padding(t_env *e, int n);
-void	buffer(t_env *e, void *new, size_t size);
+int						ft_printf(const char *restrict format, ...);
+void					padding(t_env *e, int n);
+void					buffer(t_env *e, void *new, size_t size);
 
-void	ftpf_putnb(t_env *e);
-void	ftpf_itoa(intmax_t n, t_env *e, int len);
-void	ftpf_ibasefill(uintmax_t tmp, int b, char s[BUF_SIZE], t_env *e);
-void	ftpf_itoabase(uintmax_t n, int b, t_env *e);
-void	ftpf_putnb_base(int base, t_env *e);
+void					ftpf_putnb(t_env *e);
+void					ftpf_itoa(intmax_t n, t_env *e, int len);
+void					ftpf_ibasefill(uintmax_t tmp, int b, char s[BUF_SIZE],
+							t_env *e);
+void					ftpf_itoabase(uintmax_t n, int b, t_env *e);
+void					ftpf_putnb_base(int base, t_env *e);
 
-void	ftpf_putwchar(t_env *e, unsigned int wc, int wlen, int nb_bytes);
-void	ftpf_putwstr(t_env *e);
-void	ftpf_putstr(t_env *e);
-void	ftpf_print(char *s, t_env *e);
-void	ftpf_character(t_env *e, unsigned c);
+void					ftpf_putwchar(t_env *e, unsigned int wc, int wlen,
+							int nb_bytes);
+void					ftpf_putwstr(t_env *e);
+void					ftpf_putstr(t_env *e);
+void					ftpf_print(char *s, t_env *e);
+void					ftpf_character(t_env *e, unsigned c);
 
-void	ftpf_pt_address(t_env *e);
+void					ftpf_pt_address(t_env *e);
 
-void	parse(t_env *e);
+void					parse(t_env *e);
 
-int		ft_strchri(char *s, int c, int i);
-size_t	ft_wcharlen(unsigned wc);
-int		ft_atoi(char *s);
-char	*ft_strchr(const char *s, int c);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-size_t	ft_strlen(const char *s);
-size_t	ft_wstrlen(unsigned *s);
-int		ft_strchri_base(char *s, int c, int i);
-
+int						ft_strchri(char *s, int c, int i);
+size_t					ft_wcharlen(unsigned wc);
+int						ft_atoi(char *s);
+char					*ft_strchr(const char *s, int c);
+void					*ft_memcpy(void *dest, const void *src, size_t n);
+size_t					ft_strlen(const char *s);
+size_t					ft_wstrlen(unsigned *s);
+int						ft_strchri_base(char *s, int c, int i);
 
 #endif

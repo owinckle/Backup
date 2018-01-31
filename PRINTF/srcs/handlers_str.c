@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handlers_str.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: owinckle <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/31 12:41:46 by owinckle          #+#    #+#             */
+/*   Updated: 2018/01/31 12:41:49 by owinckle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
 void			ftpf_putwchar(t_env *e, unsigned int wc, int wlen, int nb_bytes)
@@ -68,14 +80,14 @@ void			ftpf_putstr(t_env *e)
 	{
 		len = (int)(ft_strlen((char *)s));
 		(e->f & F_APP_PRECI) ? len = MIN(e->precision, len) : 0;
-		e->padding = (e->min_length) > 0 ? (e->min_length - len) :0;
+		e->padding = (e->min_length) > 0 ? (e->min_length - len) : 0;
 		padding(e, 0);
 		buffer(e, s, len);
 		padding(e, 1);
 	}
 }
 
-void	ftpf_print(char *s, t_env *e)
+void			ftpf_print(char *s, t_env *e)
 {
 	if (!s)
 	{
@@ -89,7 +101,7 @@ void	ftpf_print(char *s, t_env *e)
 		buffer(e, s, (int)ft_strlen(s));
 }
 
-void	ftpf_character(t_env *e, unsigned c)
+void			ftpf_character(t_env *e, unsigned c)
 {
 	e->printed = (e->f & F_LONG || e->f & F_LONG2) ? ft_wcharlen(c) : 1;
 	if ((e->padding = e->min_length - e->printed) < 0)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handlers_nb.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: owinckle <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/31 12:42:20 by owinckle          #+#    #+#             */
+/*   Updated: 2018/01/31 12:42:21 by owinckle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 #include <stdio.h>
 
@@ -19,7 +31,6 @@ void	ftpf_putnb(t_env *e)
 		n = ((intmax_t)va_arg(e->ap, int));
 	(e->f & F_ZERO) ? e->precision = e->min_length : 0;
 	ftpf_itoa(n, e, 0);
-
 }
 
 void	ftpf_putnb_base(int base, t_env *e)
@@ -39,7 +50,6 @@ void	ftpf_putnb_base(int base, t_env *e)
 	else
 		n = (uintmax_t)va_arg(e->ap, unsigned int);
 	ftpf_itoabase(n, base, e);
-
 }
 
 void	ftpf_itoa(intmax_t n, t_env *e, int len)
@@ -62,7 +72,7 @@ void	ftpf_itoa(intmax_t n, t_env *e, int len)
 	padding(e, 0);
 	tmp = ABS(n);
 	ftpf_ibasefill(tmp, 10, s, e);
-	(e->f & F_SPACE) ? s[0] =  ' ' : 0;
+	(e->f & F_SPACE) ? s[0] = ' ' : 0;
 	(n < 0) ? s[0] = '-' : 0;
 	(e->f & F_PLUS && n >= 0) ? s[0] = '+' : 0;
 	buffer(e, s, e->printed);
