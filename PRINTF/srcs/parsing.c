@@ -62,7 +62,15 @@ static void	conversion(t_env *e)
 		ftpf_putnb_base(ft_strchri_base("....ou..x", e->c, -1) << 1, e);
 	else if (e->c == '%')
 		ftpf_character(e, '%');
-
+	else
+	{
+		if (e->min_length != 0)
+		{
+			ftpf_character(e, e->c);
+			++e->format;
+		}
+		--e->format;
+	}
 }
 
 void		parse(t_env *e)

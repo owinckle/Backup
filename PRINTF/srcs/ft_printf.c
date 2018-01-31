@@ -62,12 +62,14 @@ int		ft_printf(const char * restrict format, ...)
 	return (e.len);
 }
 
+/*
 int	 main(int ac, char **av)
 {
-	int i = ft_printf("Salut\n");
-	int n = printf("Salut\n");
+	int i = ft_printf("{%-10R}\n", 42);
+	int n = printf("{%-10R}\n", 42);
 
 	printf("Ft: [%d]\n", i);
 	printf("LibC: [%d]\n", n);
 	return (0);
 }
+*/

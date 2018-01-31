@@ -4,7 +4,7 @@ NAME = libftprintf.a
 
 FLAGS = -Wall -Wextra -Werror
 
-DIR_S = sources
+DIR_S = srcs
 
 DIR_O = temporary
 
