@@ -1,7 +1,6 @@
 #include "../includes/ft_printf.h"
-#include <stdio.h>
 
-void	padding(t_env *e, int n)
+void		padding(t_env *e, int n)
 {
 	if (!e->padding)
 		return ;
@@ -9,12 +8,12 @@ void	padding(t_env *e, int n)
 	if (!n && !(e->f & F_MINUS))
 		while (e->padding--)
 			buffer(e, &e->c, 1);
-		else if (n && (e->f & F_MINUS))
-			while (e->padding--)
-				buffer(e, &e->c, 1);
+	else if (n && (e->f & F_MINUS))
+		while (e->padding--)
+			buffer(e, &e->c, 1);
 }
 
-void	buffer(t_env *e, void *new, size_t size)
+void		buffer(t_env *e, void *new, size_t size)
 {
 	int			diff;
 	long long	new_i;
@@ -36,9 +35,9 @@ void	buffer(t_env *e, void *new, size_t size)
 	e->len += size;
 }
 
-int		ft_printf(const char * restrict format, ...)
+int			ft_printf(const char *restrict format, ...)
 {
-	t_env	e;
+	t_env e;
 
 	e.format = (char *)format;
 	e.len = 0;
@@ -61,15 +60,3 @@ int		ft_printf(const char * restrict format, ...)
 	va_end(e.ap);
 	return (e.len);
 }
-
-/*
-int	 main(int ac, char **av)
-{
-	int i = ft_printf("{%-10R}\n", 42);
-	int n = printf("{%-10R}\n", 42);
-
-	printf("Ft: [%d]\n", i);
-	printf("LibC: [%d]\n", n);
-	return (0);
-}
-*/

@@ -1,6 +1,6 @@
 #include "../includes/ft_printf.h"
 
-size_t	ft_wcharlen(unsigned wc)
+size_t			ft_wcharlen(unsigned wc)
 {
 	if (wc < 0x80)
 		return (1);
@@ -11,7 +11,7 @@ size_t	ft_wcharlen(unsigned wc)
 	return (4);
 }
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void			*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	char *s;
 	char *d;
@@ -23,7 +23,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
-int		ft_strchri(char *s, int c, int i)
+int				ft_strchri(char *s, int c, int i)
 {
 	while (s[++i])
 		if (s[i] == c)
@@ -31,7 +31,7 @@ int		ft_strchri(char *s, int c, int i)
 	return (-1);
 }
 
-char	*ft_strchr(const char *s, int c)
+char			*ft_strchr(const char *s, int c)
 {
 	char	*str;
 	char	d;
@@ -53,8 +53,7 @@ char	*ft_strchr(const char *s, int c)
 		return (NULL);
 }
 
-
-int		ft_atoi(char *s)
+int				ft_atoi(char *s)
 {
 	long	r;
 	short	sign;
