@@ -5,6 +5,8 @@
 # include "get_next_line.h"
 # include <stdio.h>
 
+# define PLAYER		"owinckle.filler"
+
 typedef	struct		s_v2
 {
 	int				x;

@@ -5,7 +5,7 @@
 
 void	p_declare(t_env *e, char *line)
 {
-	if (ft_strstr(line, "owinckle.filler"))
+	if (ft_strstr(line, PLAYER))
 		e->p.id = (ft_strstr("p1", line)) ? 1 : 2;
 
 }
