@@ -15,7 +15,7 @@ void	infos(t_env *e)
 	char	*line;
 	char	*buf;
 
-	while (get_next_line(0, &line) > 0)
+	while (get_next_line(1, &line) > 0)
 	{
 		if (strstart(line, "$$$"))
 			p_declare(e, line);
