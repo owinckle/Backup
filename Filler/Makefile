@@ -2,7 +2,9 @@ CC = gcc
 NAME = owinckle.filler
 # FLAGS = -Wall -Wextra -Werror -ggdb
 SRC = srcs/main.c\
-	srcs/assets.c
+	srcs/assets.c\
+	srcs/init.c\
+	srcs/update.c
 	
 OBJ = $(SRC:.c=.o)
 
