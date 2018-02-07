@@ -12,19 +12,15 @@ int		main(int ac, char **av)
 
 	//MAIN
 	infos(&e);
-	update_tab(&e);
-	// while (get_next_line(0, &line) > 0)
-	// {
-	// 	if (strstart(line, "Plateau"))
-	// 		update_tab(&e);
-	// }
 
 
 
 	//DEBUG
 	dprintf(e.fd, "Player ID: %d\n", e.p.id);
 	dprintf(e.fd, "Size Y: %d\n", e.tab_size.y);
-	dprintf(e.fd, "Size X: %d\n\n", e.tab_size.x);
+	dprintf(e.fd, "Size X: %d\n", e.tab_size.x);
+	dprintf(e.fd, "Origin Y: %d\n", e.p.og.y);
+	dprintf(e.fd, "Origin X: %d\n\n", e.p.og.x);
 	int x = -1;
 	int y = -1;
 	while (++y < e.tab_size.y)

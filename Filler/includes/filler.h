@@ -40,10 +40,11 @@ int					strstart(char *str, char *start);
 void				tab_init(t_env *e);
 void				declare(t_env *e, char *line);
 void				infos(t_env *e);
+void				player_init(t_env *e);
 
 /*
 ** update.c
 */
-void				update_tab(t_env *e);
+
 
 #endif
