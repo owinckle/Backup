@@ -3,7 +3,6 @@
 int		main(int ac, char **av)
 {
 	t_env	e;
-	char	*line;
 
 	//DEBUG
 	e.fd = open("file_debug", O_RDWR);
@@ -12,6 +11,7 @@ int		main(int ac, char **av)
 
 	//MAIN
 	infos(&e);
+	player(&e);
 
 
 
@@ -20,7 +20,11 @@ int		main(int ac, char **av)
 	dprintf(e.fd, "Size Y: %d\n", e.tab_size.y);
 	dprintf(e.fd, "Size X: %d\n", e.tab_size.x);
 	dprintf(e.fd, "Origin Y: %d\n", e.p.og.y);
-	dprintf(e.fd, "Origin X: %d\n\n", e.p.og.x);
+	dprintf(e.fd, "Origin X: %d\n", e.p.og.x);
+	dprintf(e.fd, "Piece Y: %d\n", e.piece.y);
+	dprintf(e.fd, "Piece X: %d\n", e.piece.x);
+
+	dprintf(e.fd, "\n");
 	int x = -1;
 	int y = -1;
 	while (++y < e.tab_size.y)

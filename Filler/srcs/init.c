@@ -45,6 +45,7 @@ void	player_init(t_env *e)
 			j = -1;
 		}
 	}
+	save_piece(e, line);
 }
 
 void	declare(t_env *e, char *line)
@@ -66,7 +67,6 @@ void	declare(t_env *e, char *line)
 void	infos(t_env *e)
 {
 	char	*line;
-	char	*buf;
 
 	while (get_next_line(0, &line) > 0)
 	{
@@ -75,7 +75,7 @@ void	infos(t_env *e)
 		else if (strstart(line, "Plateau"))
 		{
 			declare(e, line);
-			break ;
+			return ;
 		}
 	}
 }

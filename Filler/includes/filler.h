@@ -25,6 +25,7 @@ typedef struct		s_env
 {
 	t_player		p;
 	t_v2			tab_size;
+	t_v2			piece;
 	int				fd;
 	int				**tab;
 }					t_env;
@@ -45,6 +46,13 @@ void				player_init(t_env *e);
 /*
 ** update.c
 */
+void				player(t_env *e);
+
+/*
+** game.c
+*/
+void				save_piece(t_env *e, char *line);
+void				play(t_env *e);
 
 
 #endif

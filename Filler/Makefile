@@ -4,7 +4,8 @@ NAME = owinckle.filler
 SRC = srcs/main.c\
 	srcs/assets.c\
 	srcs/init.c\
-	srcs/update.c
+	srcs/update.c\
+	srcs/game.c
 	
 OBJ = $(SRC:.c=.o)
 
