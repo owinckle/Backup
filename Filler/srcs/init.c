@@ -27,7 +27,7 @@ void	player_init(t_env *e)
 
 	j = -1;
 	i = -1;
-	while (get_next_line(0, &line) > 0 && ++i < e->tab_size.y + 1)
+	while (get_next_line(0, &line) > 0 && ++i < e->tab_size.y)
 	{
 		if (i > 0 && (line = ft_strchr(line, ' ') + 1))
 		{
@@ -45,7 +45,7 @@ void	player_init(t_env *e)
 			j = -1;
 		}
 	}
-	save_piece(e, line);
+	// dprintf(e->fd, "%s\n", line);
 }
 
 void	declare(t_env *e, char *line)

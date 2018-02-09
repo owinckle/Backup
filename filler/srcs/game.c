@@ -10,7 +10,28 @@ void	save_piece(t_env *e, char *line)
 
 static void	check_space(int y, int x, t_env *e)
 {
-	//Check up/down/right/left
+	int		i;
+	int		tmp;	
+	// if (e->piece.y > 1)
+	// {
+	// 	//Check Up/Down
+	// }
+	if (e->piece.x > 1 && (i = x))
+	{
+		if (e->tab_size.x >= e->piece.x + x)
+		{	
+			while (++i < e->piece.x + x)
+			{
+				if (e->tab[y][i] != 0)
+					tmp = -42;
+			}
+			if (tmp != -42)
+			{
+				dprintf(e->fd, "%d %d\n", y, x);
+				printf("%d %d\n", y, x);
+			}
+		}
+	}
 }
 
 void	play(t_env *e)
@@ -24,8 +45,9 @@ void	play(t_env *e)
 	{
 		while(++x < e->tab_size.x)
 		{
-			check_space(y, x, e);
+			if (e->tab[y][x] == e->p.id)
+				check_space(y, x, e);
 		}
 		x = -1;
-	} 	
+	}
 }
