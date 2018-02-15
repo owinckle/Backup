@@ -27,7 +27,7 @@ static void	check_space(int y, int x, t_env *e)
 			}
 			if (tmp != -42)
 			{
-				dprintf(e->fd, "%d %d\n", y, x);
+				dprintf(e->fd, "pos: %d %d\n", y, x);
 				printf("%d %d\n", y, x);
 			}
 		}
