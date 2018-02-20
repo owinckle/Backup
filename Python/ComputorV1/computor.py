@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import sys
+from time import sleep
 
 #
 # ComputerV1
@@ -16,10 +17,30 @@ import sys
 #  5 + 4 * X + X^2= X^2
 #
 
-def printl(bool):
-	print ("\033[31m--------------------------------------------------\033[39m")
+def header(bool):
+	if bool == 0:
+		print("\033[36m")
+		print(" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -") ; sleep(0.07)
+		print("|    ******                                         **                               **   |") ; sleep(0.07)
+		print("|   **////**                      ******           /**                              ***   |") ; sleep(0.07)
+		print("|  **    //   ******  ********** /**///** **   ** ******  ******  ******   **    **//**   |") ; sleep(0.07)
+		print("| /**        **////**//**//**//**/**  /**/**  /**///**/  **////**//**//*  /**   /** /**   |") ; sleep(0.07)
+		print("| /**       /**   /** /** /** /**/****** /**  /**  /**  /**   /** /** /   //** /**  /**   |") ; sleep(0.07)
+		print("| //**    **/**   /** /** /** /**/**///  /**  /**  /**  /**   /** /**      //****   /**   |") ; sleep(0.07)
+		print("|  //****** //******  *** /** /**/**     //******  //** //****** /***       //**    ****  |") ; sleep(0.07)
+		print("|   //////   //////  ///  //  // //       //////    //   //////  ///         //    ////   |") ; sleep(0.07)
+		print("                                                                      By: Ocean Winckler  |") ; sleep(0.07)
+		print(" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+		print("\033[39m")
 	if bool == 1:
 		exit()
+
+def output(equation, reduced, degree):
+	sleep(0.5)
+	print("Equation: " + equation)
+	print("Reduced form: ")
+	print("Polynominal degree: " + str(degree))
+	print("")
 
 class Computor():
 	equation = 0
@@ -30,17 +51,28 @@ class Computor():
 		self.equation = equation
 		self.degree = degree
 		self.arg = arg
+		tmp = 0
 		sys.argv.pop(0)
 		if len((sys.argv)) == 1:
-			self.equation = "Equation: " + sys.argv[0]
+			self.equation = sys.argv[0]
 			self.arg = 1
+			for i, c in enumerate(self.equation):
+				if c.isalpha():
+					tmp += int(self.equation[i + 2])
+				if c == '+' or c == '-' or c == '*' or c == '=':
+					if tmp > degree:
+						degree = tmp
+					tmp = 0
+				if tmp > degree:
+					degree = tmp
+			self.degree = degree
 		else:
 			self.equation = "Not enough argument"
 			self.arg = -1
 
 computor = Computor();
-printl(0)
-print(computor.equation)
+header(0)
+output(computor.equation, 0, computor.degree)
 if computor.arg == -1:
-	printl(1)
-printl(1)
+	header(1)
+header(1)
