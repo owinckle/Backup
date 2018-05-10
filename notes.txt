@@ -1,0 +1,9 @@
+ASM LLDB:
+(lldb) di -n main -F intel
+
+ASM COMPILE:
+nasm -f macho .s -o .o
+ld .o -macosx_version_min 10.8 -lSystem
+
+ASM SYNTAX:
+Everything after ";" is a comment
