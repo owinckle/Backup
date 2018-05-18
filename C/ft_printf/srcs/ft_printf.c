@@ -15,7 +15,7 @@
 
 void		padding(t_env *e, int n)
 {
-	if (!e->padding)
+	if (e->padding < 0)
 		return ;
 	e->c = 32 | (e->f & F_ZERO);
 	if (!n && !(e->f & F_MINUS))
