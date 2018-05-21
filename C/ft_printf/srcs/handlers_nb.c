@@ -54,7 +54,7 @@ void	ftpf_putnb_base(int base, t_env *e)
 
 void	ftpf_itoa(intmax_t n, t_env *e, int len)
 {
-	char		s[21];
+	char		s[64];
 	uintmax_t	tmp;
 
 	tmp = ABS(n);
@@ -82,7 +82,7 @@ void	ftpf_itoa(intmax_t n, t_env *e, int len)
 void	ftpf_itoabase(uintmax_t n, int b, t_env *e)
 {
 	uintmax_t	tmp;
-	char		s[21];
+	char		s[64];
 	int			ext;
 
 	e->printed = 0;
