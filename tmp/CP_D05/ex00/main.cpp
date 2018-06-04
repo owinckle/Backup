@@ -2,8 +2,6 @@
 
 int	main()
 {
-	int i = 0;
-	int x = 0;
 	Bureaucrat robert("Robert", 1);
 	std::cout << "** Creating a new Bureaucrat Robert **" << std::endl;
 	std::cout << "Using << operator on Robert: " << robert << std::endl;
