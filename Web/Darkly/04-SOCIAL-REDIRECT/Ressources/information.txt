@@ -1,0 +1,12 @@
+- How -
+Social redirect links are formatted in a way that you can easily redirect
+anyone to any websites just by modifying the link.
+Exemple:
+page=redirect&site=facebook to page=redirect&site=42
+
+- What is it -
+It's possible to redirect anyone who trust this website to some other malicious
+website.
+
+- How to avoid it -
+When a redirect link is used, it could check a list of allowed websites.

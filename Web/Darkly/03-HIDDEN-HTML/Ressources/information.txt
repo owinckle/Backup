@@ -1,0 +1,11 @@
+- How -
+Go to ?page=recover. There's a hidden input tag in the HTML that
+contains an email as value. Change it to yours.
+
+- What is it -
+Some websites store data hidden variables, invisible to users unless they
+inpect the code and edit it. Let's be real, only someone who barely knows
+how to even create a .html file would be dumb enough to do that..
+
+- How to avoid it -
+Instead of grabbing the email from the html, you could use PHP instead.

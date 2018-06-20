@@ -1,0 +1,9 @@
+- How -
+Go to ?page=feedback and input "script" in the comment field.
+
+- What is it -
+An XSS vulnerability allows attackers to inject client side scripts.
+
+- How to avoid it -
+You can use a lot of diffents libraries to avoid these kind of vulnerabilities.
+PHP exemple: $comment = htmlspecialchars($_GET['comment']);
