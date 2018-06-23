@@ -1,0 +1,10 @@
+- How -
+Modify the "I_am_admin" cookie using a tool such as Edit This Cookie on Chrome
+and change it to the md5 hashed value of true.
+
+- What is it -
+Cookies are used on almost every websites and sometimes data are in clear or not secured.
+
+- How to avoid it -
+Insted of using cookies, it would be safer to use Sessions in PHP or simply a User system
+with different rights.
