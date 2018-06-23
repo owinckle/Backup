@@ -10,6 +10,8 @@ def updateData():
 
 def analyse(usrInput, answer):
 	print(YukiOut + answer)
+	if usrInput == "bye":
+		exit()
 
 def yuki():
 	username = data.get("USER", "Name") + "> "
