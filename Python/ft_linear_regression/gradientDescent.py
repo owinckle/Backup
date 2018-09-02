@@ -39,20 +39,35 @@ def saveTheta(t0, t1):
 	line = [str(t0), ",", str(t1)]
 	file.writelines(line)
 	file.close
-	print("Theta0: " + str(t0) + " | Theta1: " + str(t1) + "\n")
+	print("\033[35mTheta0: \033[36m" + str(t0) + " \033[32m| \033[35mTheta1: \033[36m" + str(t1) + "\n")
 	exit()
+
+def minKM(data):
+	minval = data[0][0]
+	for i in data:
+		if i[0] < minval:
+			minval = i[0]
+	return minval
+
+def maxKM(data):
+	maxval = data[0][0]
+	for i in data:
+		if i[0] > maxval:
+			maxval = i[0]
+	return maxval
 
 def computeThetas(data):
 	theta = [0.0, 0.0]
 	tmpTheta = [1.0, 1.0]
 	m = len(data)
-	xMin = min(data[0])
-	xMax = max(data[0])
+	xMin = minKM(data)
+	xMax = maxKM(data)
 	scale = xMax - xMin
-	scaleMin = xMin / scale
+	for i, x in enumerate(data):
+		data[i][0] = float(x[0])
 	data = [((val[0] - xMin) / scale, val[1]) for val in data]
 	learningRate = 0.15
-	while (abs(tmpTheta[0]) / 0.001 and abs(tmpTheta[1]) > 0.001):
+	while (abs(tmpTheta[0]) / 0.1 and abs(tmpTheta[1]) > 0.1):
 		SumT0 = sumTheta0(theta[0], theta[1], data, m)
 		SumT1 = sumTheta1(theta[0], theta[1], data, m)
 		tmpTheta[0] = learningRate * SumT0 * (1.0 / m)
