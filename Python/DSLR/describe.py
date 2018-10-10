@@ -1,45 +1,47 @@
-import numpy as np
 import sys
+import YukiPackage.csv as ypcsv
+import YukiPackage.stats as ypstats
 
-FIELD = ['Count', 'Mean', 'Std', 'Min', '25%', '50%', '75%', 'Max']
+def describe(file):
+	def analyze(arr):
+		c	= len(arr)
+		m	= ypstats.mean(arr)
+		s	= ypstats.std(arr)
+		mn	= arr[0]
+		p1	= ypstats.percentile(arr, 25)
+		p2	= ypstats.percentile(arr, 50)
+		p3	= ypstats.percentile(arr, 75)
+		mx	= arr[c - 1]
+		return c, m, s, mn, p1, p2, p3, mx
 
-def describe(f):
+	def calculate(data):
+		rslt = []
+		for feature in data:
+			for el in feature:
+				rslt.append(analyze(sorted(el, key=float)))
+		return rslt
 
-    def analyze(arr):
-        a = np.sort(arr, kind='mergesort')
-        c = len(a)
-        m = sum(a) / c
-        std = (sum((a - m) ** 2) / (c - 1)) ** 0.5
-        v0 = a[int(a.shape[0] * 0.25)]
-        v1 = a[int(a.shape[0] * 0.5)]
-        v2 = a[int(a.shape[0] * 0.75)]
-        return c, m, std, a[0], v0, v1, v2, a[c - 1]
+	def sortData(data):
+		featureList = []
+		features = [[] for x in range(len(data[0]))]
+		for el in data:
+			for idx, val in enumerate(el):
+				if idx < len(data[0]):
+					features[idx].insert(len(features[idx]), val)
+		featureList.append(features)
+		return featureList
 
-    def calculate(data):
-        rslt = []
-        for feature in data.T:
-            rslt.append(analyze(feature))
-        return np.array(rslt)
+	header = ypcsv.getHead(file)
+	data = ypcsv.getData(file, 1)
+	data = sortData(data)
+	rslt = calculate(data)
+	print(rslt)
 
-    def print_data(rslt):
-        print('%-8s' % '' + ''.join(['{:>15.15s}'.format(x) for x in header]))
-        for i in range(len(FIELD)):
-            print('%-8s' % FIELD[i] + ''.join(['{:15.6f}'.format(x) for x in rslt[i]]))
-
-    header = np.genfromtxt(f, delimiter=',', max_rows=1, dtype='str')
-    data = np.genfromtxt(f, delimiter=',', skip_header=1)
-    mask = ~np.all(np.isnan(data), axis=0)
-    data = data[:, mask]                                    #removing all columns full of Nan
-    header = header[mask]
-    data = data[~np.isnan(data).any(axis=1)]                #removing all rows with a Nan
-    rslt = calculate(data)
-    print_data(rslt.T)
 
 def main():
-    if len(sys.argv) != 2:
-        exit('''Usage: py describe.py [data_file.csv]''')
-    for f in sys.argv[1:]:
-        describe(f)
+	if len(sys.argv) != 2:
+		exit("Usage: py describe.py [data_file.csv]")
+	describe(sys.argv[1])
 
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__":
+	main()
