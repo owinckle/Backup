@@ -1,6 +1,12 @@
 import sys
 import YukiPackage.csv as ypcsv
 import YukiPackage.stats as ypstats
+import YukiPackage.lists as ypl
+import YukiPackage.display as ydisp
+
+from prettytable import PrettyTable
+
+FIELDS = ["Count", "Mean", "Std", "Min", "25%", "50%", "75%", "Max"]
 
 def describe(file):
 	def analyze(arr):
@@ -26,16 +32,23 @@ def describe(file):
 		features = [[] for x in range(len(data[0]))]
 		for el in data:
 			for idx, val in enumerate(el):
-				if idx < len(data[0]):
+				if idx < len(data[0]) and val != "NaN":
 					features[idx].insert(len(features[idx]), val)
 		featureList.append(features)
 		return featureList
 
 	header = ypcsv.getHead(file)
 	data = ypcsv.getData(file, 1)
+	data, header = ypl.cleanList(data, header, "NaN")
 	data = sortData(data)
 	rslt = calculate(data)
-	print(rslt)
+	ydisp.table(header, FIELDS, rslt)
+	###
+	# t = PrettyTable(FIELDS)
+	# for val in rslt:
+	# 	t.add_row(val)
+	# print(t)
+	###
 
 
 def main():

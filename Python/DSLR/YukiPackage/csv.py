@@ -18,6 +18,7 @@ def getData(file, dtype):
 					float(el2)
 					dtmp.append(el2)
 				except ValueError:
+					dtmp.append("NaN")
 					pass
 			d[idx] = dtmp
 			dtmp = []
