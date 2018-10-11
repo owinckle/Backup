@@ -1,14 +1,6 @@
 def delDup(l):
 	return (list(set(l)))
 
-def delAll(l, s):
-	s = "nan"
-	for val in l:
-		if val == s:
-			l.remove(s)
-	print(l)
-	return l
-
 def cleanList(data, header, s):
 	match = 0
 	ind = []

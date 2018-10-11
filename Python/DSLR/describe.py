@@ -2,9 +2,8 @@ import sys
 import YukiPackage.csv as ypcsv
 import YukiPackage.stats as ypstats
 import YukiPackage.lists as ypl
-import YukiPackage.display as ydisp
-
-from prettytable import PrettyTable
+import YukiPackage.colors as ycol
+import datascience as ds
 
 FIELDS = ["Count", "Mean", "Std", "Min", "25%", "50%", "75%", "Max"]
 
@@ -37,19 +36,20 @@ def describe(file):
 		featureList.append(features)
 		return featureList
 
+	def display(rslt):
+		tab = ds.Table(["______"] + header)
+		for c in range(0, 8, +1):
+			t = [x[c] for x in rslt]
+			t.insert(0, FIELDS[c])
+			tab.append(t)
+		print(tab)
+
 	header = ypcsv.getHead(file)
 	data = ypcsv.getData(file, 1)
 	data, header = ypl.cleanList(data, header, "NaN")
 	data = sortData(data)
 	rslt = calculate(data)
-	ydisp.table(header, FIELDS, rslt)
-	###
-	# t = PrettyTable(FIELDS)
-	# for val in rslt:
-	# 	t.add_row(val)
-	# print(t)
-	###
-
+	display(rslt)
 
 def main():
 	if len(sys.argv) != 2:
