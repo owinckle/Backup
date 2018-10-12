@@ -3,8 +3,11 @@ import sys
 import YukiPackage.csv as ypcsv
 import YukiPackage.stats as ypstats
 import YukiPackage.lists as ypl
+import numpy as np
 
 FILE = 'data/dataset_train.csv'
+HOUSES = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
+COLORS = ["red", "yellow", "blue", "green"]
 
 def histogram(file):
 	def splitHouses(features):
@@ -14,13 +17,13 @@ def histogram(file):
 		Slytherin	= []
 
 		for val in features:
-			if val[:val.index(":")] == "Gryffindor":
+			if val[:val.index(":")] == HOUSES[0]:
 				Gryffindor.append(val[val.index(":") + 1:])
-			elif val[:val.index(":")] == "Hufflepuff":
+			elif val[:val.index(":")] == HOUSES[1]:
 				Hufflepuff.append(val[val.index(":") + 1:])
-			elif val[:val.index(":")] == "Ravenclaw":
+			elif val[:val.index(":")] == HOUSES[2]:
 				Ravenclaw.append(val[val.index(":") + 1:])
-			elif val[:val.index(":")] == "Slytherin":
+			elif val[:val.index(":")] == HOUSES[3]:
 				Slytherin.append(val[val.index(":") + 1:])
 		return Gryffindor, Hufflepuff, Ravenclaw, Slytherin
 
@@ -40,9 +43,12 @@ def histogram(file):
 	for c in range(0, len(header), +1):
 		features.append([x[c] for x in f])
 	for idx, h in enumerate(header):
-		# features[idx] = ypl.delEl([x[x.index(":") + 1:] for x in features[idx]], "nan")
-		plt.hist(splitHouses(features[idx]), bins=20, alpha=0.8, histtype='stepfilled',
-			rwidth="0.8", color=["red", "yellow", "blue", "green"], label=["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"])
+		histoArray = []	
+		for arr in splitHouses(features[idx]):
+			histoArray.append(np.array(arr, dtype="float"))
+		histoArray = [arr[~np.isnan(arr)] for arr in histoArray]
+		plt.plot(histoArray, bins=20, alpha=0.8, histtype='stepfilled', color=COLORS, label=HOUSES)
+		plt.legend()
 		plt.title(h)
 		plt.show()
 
