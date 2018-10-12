@@ -1,6 +1,12 @@
 def delDup(l):
 	return (list(set(l)))
 
+def delEl(l, s):
+	for idx, val in enumerate(l):
+		if val == s:
+			l.pop(idx)
+	return l
+
 def cleanList(data, header, s):
 	match = 0
 	ind = []

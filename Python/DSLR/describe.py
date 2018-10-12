@@ -2,7 +2,6 @@ import sys
 import YukiPackage.csv as ypcsv
 import YukiPackage.stats as ypstats
 import YukiPackage.lists as ypl
-import YukiPackage.colors as ycol
 import datascience as ds
 
 FIELDS = ["Count", "Mean", "Std", "Min", "25%", "50%", "75%", "Max"]
