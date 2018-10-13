@@ -47,7 +47,7 @@ def histogram(file):
 		for arr in splitHouses(features[idx]):
 			histoArray.append(np.array(arr, dtype="float"))
 		histoArray = [arr[~np.isnan(arr)] for arr in histoArray]
-		plt.plot(histoArray, bins=20, alpha=0.8, histtype='stepfilled', color=COLORS, label=HOUSES)
+		plt.hist(histoArray, bins=20, alpha=0.8, histtype='stepfilled', color=COLORS, label=HOUSES)
 		plt.legend()
 		plt.title(h)
 		plt.show()
