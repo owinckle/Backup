@@ -8,11 +8,10 @@ CLASS	= "Hogwarts House"
 IGNORED = ["Arithmancy", "Astronomy", "Ancient Runes", "Transfiguration", "Potions", "Care of Magical Creatures"]
 
 def saveThetas(theta):
-
 	fd = open("thetas.csv", 'w')
 	for elem in theta:
-		for i, value in enumerate(elem):
-			if i != 0:
+		for idx, value in enumerate(elem):
+			if idx != 0:
 				fd.write(',')
 			fd.write(str(value))
 		fd.write('\n')
