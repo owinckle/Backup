@@ -8,23 +8,8 @@ CLASS	= "Hogwarts House"
 IGNORED = ["Arithmancy", "Astronomy", "Ancient Runes", "Transfiguration", "Potions", "Care of Magical Creatures"]
 
 def saveThetas(theta):
-	fd = open("thetas.csv", 'w')
-	for elem in theta:
-		for idx, value in enumerate(elem):
-			if idx != 0:
-				fd.write(',')
-			fd.write(str(value))
-		fd.write('\n')
-	fd.close()
-
-def getMean(data, idx):
-	total, count = 0, 0
-	for elem in data:
-		if elem[idx]:
-			total += elem[idx]
-			count += 1
-	return total / count
-
+	df = pd.DataFrame(theta, columns=range(0,8))
+	df.to_csv("thetas.csv", index=False)
 
 def getMax(data, idx):
 	maximum = data[0][idx]
@@ -54,7 +39,7 @@ def NaNtoMean(data):
 					data.iat[ind, idx + 1] = meanH
 	return data
 
-def scaleData(data, n, mean, maximum):
+def scaleData(data, n, maximum):
 	for idx in range(n):
 		if maximum[idx] != 0:
 			data[idx] /= maximum[idx]
@@ -110,9 +95,8 @@ def main():
 
 	for idx in range(n):
 		maximum.append(getMax(data, idx))
-		mean.append(getMax(data, idx))
 	for idx in range(obs):
-		data[idx] = scaleData(data[idx], n, mean, maximum)
+		data[idx] = scaleData(data[idx], n, maximum)
 	theta = gradient(data, _map, obs, n, iteration=3)
 	saveThetas(theta)
 
