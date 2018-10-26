@@ -9,7 +9,7 @@ IGNORED = ["Arithmancy", "Astronomy", "Ancient Runes", "Transfiguration", "Potio
 
 def saveThetas(theta):
 	df = pd.DataFrame(theta, columns=range(0,8))
-	df.to_csv("thetas.csv", index=False)
+	df.to_csv("thetas.csv",  index=False)
 
 def getMax(data, idx):
 	maximum = data[0][idx]
@@ -69,7 +69,6 @@ def getDataset(file):
 	return(np.array(features), np.array(_map))
 
 def hypothesis(theta, x):
-
 	z = sum([theta[i] * x[i] for i in range(len(x))])
 	return 1.0 / (1.0 + np.e ** -z)
 
@@ -80,6 +79,7 @@ def gradient(data, _map, obs, n, iteration=0, lr=3.0):
 			sums = [0.] * n
 			for idx in range(obs):
 				for ind in range(n):
+					print(hypothesis(theta[house], data[idx]))
 					sums[ind] += (hypothesis(theta[house], data[idx]) - (_map[idx] == house)) * data[idx][ind]
 			for idx in range(n):
 				theta[house][idx] -= (lr / obs) * sums[idx]
@@ -91,7 +91,6 @@ def main():
 	obs			= len(data)
 	n			= len(data[0])
 	maximum		= []
-	mean		= []
 
 	for idx in range(n):
 		maximum.append(getMax(data, idx))
