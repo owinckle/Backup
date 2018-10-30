@@ -1,0 +1,9 @@
+- How -
+On ?page=media there is an XSS exploit in the url. You can change the src in "src=" and put some scripts in base64,
+such as "PHNjcmlwdD5hbGVydCg0Mik7PC9zY3JpcHQ+" which is "<script>alert(42);</script>".
+
+- What is it -
+You could use this kind of vulnerability to redirect someone to some malicious website.
+
+- How to avoid it -
+Either put the images in a database or html, not in the link.

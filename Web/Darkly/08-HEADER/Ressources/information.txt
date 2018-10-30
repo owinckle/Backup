@@ -1,0 +1,11 @@
+- How -
+In the HTML code, there's a long comment telling us to change the referer to
+https://www.nsa.gov/ and the user-agent to ft_bornToSec.
+curl -s -A 'ft_bornToSec' --referer "https://www.nsa.gov/" "http://IP/?page=e43ad1fdc54babe674da7c7b8f0127bde61de3fbe01def7d00f151c2fcca6d1c" | grep 'flag'
+
+- What is it -
+It could be used to protect certain pages to allow only certain users using x browser.
+
+- How to avoid it -
+Instead of a "secret" method to access a page, just use a user based system with admin
+admin privileges.

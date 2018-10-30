@@ -1,0 +1,10 @@
+- How -
+In robots.txt we saw a directory named .hidden. There are dozens of directories inside directories with a
+README file in eache of them. We can use a crawler to find the flag.
+python crawler.py xxx.xxx.xxx.xxx
+
+- What is it -
+You can use this to find specific files that the devs tried to hide...
+
+- How to avoid it -
+You can protect those files using .htaccess

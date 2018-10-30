@@ -1,0 +1,9 @@
+- How -
+We can use the url to make a traversal attack to get to ../etc/passwd and get a flag.
+Use python crawler.py xxx.xxx.xxx.xxx
+
+- What is it -
+You can use this to display files you're not supposed to see, like database config infos.
+
+- How to avoid it -
+Using php, you can make sure only files below your root directory or any other directory are allowed.

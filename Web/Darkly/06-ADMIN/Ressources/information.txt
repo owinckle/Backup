@@ -1,0 +1,11 @@
+- How -
+There is a admin login page at /admin.
+Using the robots.txt file, we can see there's a /whatever folder with a htpasswd file in it,
+containing a username and a password hashed in md5. Using an online md5 database, we can login as root using "dragon" as password.
+
+- What is it -
+We usually use robots.txt files to to decide whether or not we want a page to be indexed,
+but some people don't use htaccess to secure files.
+
+- How to avoid it -
+Simply use htaccess to protect directories and files

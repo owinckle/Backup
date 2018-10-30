@@ -1,0 +1,11 @@
+- How -
+Using the previous SQL injections we saw a database named "Member Brute Force".
+1 and 1 = 0 union select username, password from Member_Brute_Force.db_default
+Use the above SQL injection in member or image search. Two usernames will appear.
+Now using one of the two, you can bruteforce the password (force.sh).
+
+- What is it -
+Use SQL code to access database informations.
+
+- How to avoid it -
+You can put a limit on calls on a page per minute.

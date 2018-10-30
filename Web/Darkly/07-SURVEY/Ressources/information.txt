@@ -1,0 +1,9 @@
+- How -
+Go to /?page=survey and change the html value of a dropdown menu to a random value such as 400.
+
+- What is it -
+It enables malicious users to cheat on polls or surveys.
+
+- How to avoid it -
+You can check the value through PHP to be sure it's between n or n value. In this case:
+($value >= 1 && $value <= 10) ? true : false
