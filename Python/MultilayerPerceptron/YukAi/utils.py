@@ -32,3 +32,6 @@ def sigmoid(x):
 def softmax(x):
 	e_x = np.exp(x - np.max(x))
 	return e_x / e_x.sum(axis=0)
+
+def derivative_function(output):
+	return output * (1.0 - output)

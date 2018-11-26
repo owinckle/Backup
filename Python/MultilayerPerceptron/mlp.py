@@ -35,11 +35,12 @@ def mlpTrain(file):
 
 	network = mlp.createNetwork(
 		mlp.DenseLayer(shape=input_shape, activation="sigmoid", type="input"),
-		mlp.DenseLayer(shape=input_shape, activation="sigmoid", type="hidden"),
-		mlp.DenseLayer(shape=input_shape, activation="sigmoid", type="hidden"),
-		mlp.DenseLayer(shape=2, activation="softmax", type="output")
+		mlp.DenseLayer(shape=3, activation="sigmoid", type="hidden"),
+		mlp.DenseLayer(shape=3, activation="sigmoid", type="hidden"),
+		mlp.DenseLayer(shape=1, activation="softmax", type="output")
 		)
-	network.think(M, B, data=dataArr[0], lr=0.01)
+	for entry in dataArr:
+		network.think(entry[0], data=entry)
 
 def main(args):
 	dataset = ""
