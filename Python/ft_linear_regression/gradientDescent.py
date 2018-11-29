@@ -1,85 +1,54 @@
-import csv
+import pandas as pd
+import numpy as np
+import sys
 
-dataFile = "data.csv"
+def getData(dataset):
+	return np.array(pd.read_csv(dataset))
 
-def getData():
-	data = []
-	with open(dataFile) as file:
-		reader = csv.reader(file, delimiter=' ', quotechar='|')
-		for row in reader:
-			newRow = []
-			validData = True
-			row = row[0].split(",")
-			for elem in row:
-				if not elem.isdigit():
-					validData = False
-				else:
-					newRow.append(int(elem))
-			if validData == True:
-				data.append(newRow)
-	return (data)
+def saveThetas(thetas):
+	df = pd.DataFrame(thetas)
+	df.to_csv("thetas.csv",  index=False)
+
+def scaleData(data, _max):
+	for idx, x in enumerate(data):
+		data[idx][0] /= _max[0]
+		data[idx][1] /= _max[1]
+	return data
 
 def estimate(t0, t1, x):
 	return (t0 + (t1 * x))
 
-def sumTheta0(t0, t1, data, m):
-	value = 0.
-	for i in range(0, m):
-		value += estimate(t0, t1, data[i][0]) - data[i][1]
-	return (value)
+def sumt0(t0, t1, data, m):
+	total = 0.
 
-def sumTheta1(t0, t1, data, m):
-	value = 0.
-	for i in range(0, m):
-		value += (estimate(t0, t1, data[i][0]) - data[i][1]) * data[i][0]
-	return (value)
+	for val in data:
+		total += estimate(t0, t1, val[0]) - val[1]
+	return total
 
-def saveTheta(t0, t1):
-	file = open("data", "w")
-	line = [str(t0), ",", str(t1)]
-	file.writelines(line)
-	file.close
-	print("\033[35mTheta0: \033[36m" + str(t0) + " \033[32m| \033[35mTheta1: \033[36m" + str(t1) + "\n")
-	exit()
+def sumt1(t0, t1, data, m):
+	total = 0.
 
-def minKM(data):
-	minval = data[0][0]
-	for i in data:
-		if i[0] < minval:
-			minval = i[0]
-	return minval
+	for val in data:
+		total += (estimate(t0, t1, val[0]) - val[1]) * val[0]
+	return total
 
-def maxKM(data):
-	maxval = data[0][0]
-	for i in data:
-		if i[0] > maxval:
-			maxval = i[0]
-	return maxval
+def main(dataset):
+	data	= getData(dataset)
+	m		= len(data)
+	_max	= [max(data[:,0]), max(data[:,1])]
+	data	= scaleData(data.astype(float), _max)
+	lr		= 0.9
+	iterate	= 200
+	thetas	= [0., 0.]
+	tmp		= [1., 1.]
 
-def computeThetas(data):
-	theta = [0.0, 0.0]
-	tmpTheta = [1.0, 1.0]
-	m = len(data)
-	xMin = minKM(data)
-	xMax = maxKM(data)
-	scale = xMax - xMin
-	for i, x in enumerate(data):
-		data[i][0] = float(x[0])
-	data = [((val[0] - xMin) / scale, val[1]) for val in data]
-	learningRate = 0.15
-	while (abs(tmpTheta[0]) / 0.1 and abs(tmpTheta[1]) > 0.1):
-		SumT0 = sumTheta0(theta[0], theta[1], data, m)
-		SumT1 = sumTheta1(theta[0], theta[1], data, m)
-		tmpTheta[0] = learningRate * SumT0 * (1.0 / m)
-		tmpTheta[1] = learningRate * SumT1 * (1.0 / m)
-		theta[0] -= tmpTheta[0]
-		theta[1] -= tmpTheta[1]
-	theta[1] /= scale
-	saveTheta(theta[0], theta[1])
+	for i in range(iterate):
+		tmp[0]		= lr * (1 / m) * sumt0(thetas[0], thetas[1], data, m)
+		tmp[1]		= lr * (1 / m) * sumt1(thetas[0], thetas[1], data, m)  
+		thetas[0]	-= tmp[0]
+		thetas[1]	-= tmp[1]
+	saveThetas(thetas)
 
-def main():
-	data = getData()
-	computeThetas(data)
-
-if __name__ == '__main__':
-	main()
+if __name__ == "__main__":
+	f = "data.csv"
+	main(f)
