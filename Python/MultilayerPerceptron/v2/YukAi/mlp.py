@@ -11,11 +11,21 @@ purple	= "\033[35m"
 cyan	= "\033[36m"
 white	= "\033[37m"
 
+LAYER_TYPE = ["hidden", "output"]
+
+'''
+Dataset Template
+Index 0		: Desired output
+Index 1+	: Data
+'''
+
+# Network Class
 class Network():
 	def __init__(self, shape, activation):
-		self.inLayer	= Layer(shape, activation, "input")
+		self.inLayer	= Layer(shape - 1, activation, "input")
 		self.layers		= []
 		self.outputLayer= None
+		self.locked		= False
 
 	# Add a Layer to the Network
 	def addLayer(self, shape, activation, type):
@@ -35,13 +45,39 @@ class Network():
 
 		# Initialize weights
 		for idx, layer in enumerate(self.layers):
+			# Check layer type
+			if not layer.type in LAYER_TYPE:
+				ul.outputLogs(red, "Error", "Unknown layer: " + layer.type)
+				exit()
+
 			size = self.layers[idx - 1].shape
+			if idx == 0:
+				size = self.inLayer.shape
 			for ind, node in enumerate(layer.nodes):
 				self.layers[idx].nodes[ind].weights.append(np.random.uniform(low=0.01, high=0.1, size=size))
 			ul.outputLogs(cyan, "Initializing Weights", "Layer " + str(idx + 1))
 
+		self.locked = True
+		ul.outputLogs(green, "Locked", "Network is ready for training")
+
+	def activate_node(self, layer_id, node_id):
+		pass
+
+	# Train Network
+	def train(self, input_data, iteration=3):
+		if not self.locked:
+			ul.outputLogs(red, "Error", "Please lock the network before training")
+		# Iterate
+		for i in range(iteration):
+			# For each entry, set it to input layer neurones
+			for data in input_data:
+				self.desired = data[0]
+				for idx, node in enumerate(self.inLayer.nodes):
+					node.value = data[idx + 1]
+
+# Layer Class
 class Layer():
-	def __init__(self, shape, activation, type):
+	def __init__(self,shape, activation, type):
 		self.type		= type
 		self.activation	= activation
 		self.shape		= shape
@@ -53,6 +89,7 @@ class Layer():
 
 		ul.outputLogs(cyan, "Creating Layer", logs="Type: " + type + " | Shape: " + str(shape) + " | Activation: " + activation)
 
+# Node Class
 class Node():
 	def __init__(self):
 		self.weights	= []
@@ -61,6 +98,6 @@ class Node():
 
 # Create Network with on input layer
 def createNetwork(shape, activation):
-	ul.outputLogs(cyan, "Initializing Neural Network")
+	ul.outputLogs(green, "Initializing Neural Network")
 	network = Network(shape, activation)
 	return network

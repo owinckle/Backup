@@ -35,11 +35,12 @@ def mlpTrain(dataset):
 		dataArr[idx] = ul.scaleData(entry, mean, maximum, offset=1)
 
 	# Create Network
-	network = mlp.createNetwork(1, "sigmoid")
+	network = mlp.createNetwork(input_shape, "sigmoid")
 	network.addLayer(2, "sigmoid", "hidden")
 	network.addLayer(3, "sigmoid", "hidden")
 	network.addLayer(1, "softmax", "output")
 	network.lock()
+	network.train(dataArr, iteration=1)
 
 def main(dataset):
 	mlpTrain(dataset)
