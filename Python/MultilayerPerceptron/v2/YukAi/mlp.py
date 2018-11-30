@@ -26,10 +26,19 @@ class Network():
 
 	# Verify and lock the network
 	def lock(self):
+		# Append output layer else exit()
 		if not self.outputLayer:
-			print(red + "Error, no output layer" + white)
+			ul.outputLogs(red, "Error", "No output layer")
 			exit()
-		self.layers.append(self.outputLayer)
+		else:
+			self.layers.append(self.outputLayer)
+
+		# Initialize weights
+		for idx, layer in enumerate(self.layers):
+			size = self.layers[idx - 1].shape
+			for ind, node in enumerate(layer.nodes):
+				self.layers[idx].nodes[ind].weights.append(np.random.uniform(low=0.01, high=0.1, size=size))
+			ul.outputLogs(cyan, "Initializing Weights", "Layer " + str(idx + 1))
 
 class Layer():
 	def __init__(self, shape, activation, type):
@@ -38,17 +47,20 @@ class Layer():
 		self.shape		= shape
 		self.nodes		= []
 
-		print(cyan + "[Creating Layer] Type: " + type + " | Shape: " + str(shape) + " | Activation: " + activation + white)
+		# Create list of node of size shape
+		for _ in range(shape):
+			self.nodes.append(Node())
+
+		ul.outputLogs(cyan, "Creating Layer", logs="Type: " + type + " | Shape: " + str(shape) + " | Activation: " + activation)
 
 class Node():
 	def __init__(self):
 		self.weights	= []
-		self.value		= []
+		self.value		= 0
 		self.error		= 0
 
 # Create Network with on input layer
 def createNetwork(shape, activation):
-	print(cyan + "[Initializing Neural Network]")
-
+	ul.outputLogs(cyan, "Initializing Neural Network")
 	network = Network(shape, activation)
 	return network

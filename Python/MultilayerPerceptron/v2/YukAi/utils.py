@@ -1,5 +1,12 @@
 import math
 
+def outputLogs(colTitle, title, logs=False):
+	white	= "\033[37m"
+	print(colTitle + "[" + title + "]", end="")
+	if logs:
+		print(" " + logs, end="")
+	print(white)
+
 def getMax(data, idx):
 	maximum = data[idx][0]
 	for elem in data[idx]:

@@ -1,9 +1,10 @@
 import sys
 import pandas as pd
 import numpy as np
+
 from YukAi import utils as ul
 from YukAi import mlp
-bon j
+
 M = 0
 B =	1
 
@@ -34,9 +35,9 @@ def mlpTrain(dataset):
 		dataArr[idx] = ul.scaleData(entry, mean, maximum, offset=1)
 
 	# Create Network
-	network = mlp.createNetwork(input_shape, "sigmoid")
-	network.addLayer(input_shape, "sigmoid", "hidden")
-	network.addLayer(input_shape, "sigmoid", "hidden")
+	network = mlp.createNetwork(1, "sigmoid")
+	network.addLayer(2, "sigmoid", "hidden")
+	network.addLayer(3, "sigmoid", "hidden")
 	network.addLayer(1, "softmax", "output")
 	network.lock()
 
@@ -44,4 +45,7 @@ def main(dataset):
 	mlpTrain(dataset)
 
 if __name__ == "__main__":
-	main(sys.argv[1])
+	if len(sys.argv) == 2:
+		main(sys.argv[1])
+	else:
+		print("Dataset not found")
