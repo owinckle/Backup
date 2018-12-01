@@ -1,4 +1,5 @@
 import math
+import numpy as np
 
 def outputLogs(colTitle, title, logs=False):
 	white	= "\033[37m"
@@ -31,3 +32,13 @@ def scaleData(entry, mean, maximum, offset=0):
 		if maximum[idx - offset] != 0:
 			entry[idx] = float(entry[idx]) / maximum[idx - offset]
 	return entry
+
+def sigmoid(x):
+	return 1.0 / (1 + np.exp(-x))
+
+def softmax(x):
+	e_x = np.exp(x - np.max(x))
+	return e_x / e_x.sum(axis=0)
+
+def derivative_function(output):
+	return output * (1.0 - output)

@@ -47,21 +47,42 @@ class Network():
 		for idx, layer in enumerate(self.layers):
 			# Check layer type
 			if not layer.type in LAYER_TYPE:
-				ul.outputLogs(red, "Error", "Unknown layer: " + layer.type)
+				ul.outputLogs(red, "Error", "Unknown layer type: " + layer.type)
 				exit()
 
 			size = self.layers[idx - 1].shape
 			if idx == 0:
 				size = self.inLayer.shape
 			for ind, node in enumerate(layer.nodes):
-				self.layers[idx].nodes[ind].weights.append(np.random.uniform(low=0.01, high=0.1, size=size))
+				self.layers[idx].nodes[ind].weights = (np.random.uniform(low=0.01, high=0.1, size=size))
 			ul.outputLogs(cyan, "Initializing Weights", "Layer " + str(idx + 1))
 
 		self.locked = True
 		ul.outputLogs(green, "Locked", "Network is ready for training")
 
+	# Activated a neuron using weights, biases and activation functions
 	def activate_node(self, layer_id, node_id):
-		pass
+		# Set input layer
+		inputL = self.inLayer if layer_id == 0 else self.layers[layer_id - 1]
+
+		# Get Weights
+		weights = self.layers[layer_id].nodes[node_id].weights
+
+		# Set activation function
+		activation = ul.sigmoid if self.layers[layer_id].activation == "sigmoid" else ul.softmax
+
+		# Activate neuron
+		nodeValue = 0.
+		for idx, inputN in enumerate(inputL.nodes):
+			nodeValue += inputN.value * weights[idx]
+		self.layers[layer_id].nodes[node_id].value = activation(nodeValue)
+
+	# Forward Propagation
+	def forwardP(self):
+		for idx, layers in enumerate(self.layers):
+			for ind, node in enumerate(layers.nodes):
+				self.activate_node(idx, ind)
+		print(self.layers[2].nodes[0].value)
 
 	# Train Network
 	def train(self, input_data, iteration=3):
@@ -74,6 +95,7 @@ class Network():
 				self.desired = data[0]
 				for idx, node in enumerate(self.inLayer.nodes):
 					node.value = data[idx + 1]
+				self.forwardP()
 
 # Layer Class
 class Layer():
