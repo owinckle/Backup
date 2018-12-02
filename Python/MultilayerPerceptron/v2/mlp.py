@@ -5,12 +5,27 @@ import numpy as np
 from YukAi import utils as ul
 from YukAi import mlp
 
+# Color variables
+black	= "\033[30m"
+red		= "\033[31m"
+green	= "\033[32m"
+yellow	= "\033[33m"
+blue	= "\033[34m"
+purple	= "\033[35m"
+cyan	= "\033[36m"
+white	= "\033[37m"
+
+# Output variables
 M = 0
 B =	1
 
 def mlpTrain(dataset):
 	def analyseData(file):
-		df	= pd.read_csv(file)
+		try:
+			df	= pd.read_csv(file)
+		except FileNotFoundError:
+			ul.outputLogs(red, "Error", "Dataset does not exist")
+			exit()
 		df.loc[-1] = df.columns.values
 		df.index = df.index + 1
 		df = df.sort_index()
@@ -38,9 +53,9 @@ def mlpTrain(dataset):
 	network = mlp.createNetwork(input_shape, "sigmoid")
 	network.addLayer(30, "sigmoid", "hidden")
 	network.addLayer(30, "sigmoid", "hidden")
-	network.addLayer(1, "softmax", "output")
+	network.addLayer(1, "sigmoid", "output")
 	network.lock()
-	network.train(dataArr, iteration=1)
+	network.train(dataArr, lr=0.5, iteration=50)
 
 def main(dataset):
 	mlpTrain(dataset)

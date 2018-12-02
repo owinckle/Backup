@@ -40,5 +40,5 @@ def softmax(x):
 	e_x = np.exp(x - np.max(x))
 	return e_x / e_x.sum(axis=0)
 
-def derivative_function(output):
+def derivative(output):
 	return output * (1.0 - output)

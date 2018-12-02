@@ -77,17 +77,48 @@ class Network():
 			nodeValue += inputN.value * weights[idx]
 		self.layers[layer_id].nodes[node_id].value = activation(nodeValue)
 
+	# Update Weights
+	def updateWeights(self):
+		for idx in range(len(self.layers)):
+			inputs = self.layers[idx - 1].nodes
+			if idx == 0:
+				inputs = self.inLayer.nodes
+			for neuron in self.layers[idx].nodes:
+				for j in range(len(inputs)):
+					neuron.weights[j] += self.lr * neuron.error * inputs[j].value
+				neuron.weights[-1] += self.lr * neuron.error
+
+	# Backward Propagation
+	def backP(self):
+		for idx in reversed(range(len(self.layers))):
+			layer = self.layers[idx]
+			errors = list()
+			if idx == len(self.layers) - 1:
+				pass
+				for j in range(len(layer.nodes)):
+					neuron = layer.nodes[j]
+					errors.append(self.desired - neuron.value)
+			else:
+				for j in range(len(layer.nodes)):
+					error = 0.0
+					for neuron in self.layers[idx + 1].nodes:
+						error += neuron.weights[j] * neuron.error
+					errors.append(error)
+			for j in range(len(layer.nodes)):
+				neuron = layer.nodes[j]
+				neuron.error = errors[j] * ul.derivative(neuron.value)
+
 	# Forward Propagation
 	def forwardP(self):
 		for idx, layers in enumerate(self.layers):
 			for ind, node in enumerate(layers.nodes):
 				self.activate_node(idx, ind)
-		print(self.layers[2].nodes[0].value)
 
 	# Train Network
-	def train(self, input_data, iteration=3):
+	def train(self, input_data, lr=0.1, iteration=3):
 		if not self.locked:
 			ul.outputLogs(red, "Error", "Please lock the network before training")
+		self.lr = lr
 		# Iterate
 		for i in range(iteration):
 			# For each entry, set it to input layer neurones
@@ -96,6 +127,9 @@ class Network():
 				for idx, node in enumerate(self.inLayer.nodes):
 					node.value = data[idx + 1]
 				self.forwardP()
+				self.backP()
+				self.updateWeights()
+				print("Expected=" + str(self.desired) + ", Got=", str(self.layers[2].nodes[0].value))
 
 # Layer Class
 class Layer():
