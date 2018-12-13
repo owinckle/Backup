@@ -7,6 +7,9 @@ import numpy as np
 SIGMOID = 1
 SOFTMAX = 2
 
+def sigmoid(x):
+	return 1 / (1 + np.exp(-x))
+
 #================#
 # Debug Function #
 #================#
@@ -37,11 +40,16 @@ class Network():
 			weights.append(node)
 		self.weights = weights
 
-	def	_feed_backward(self):
+	def	_backward_prop(self):
 		pass
 
-	def _feed_forward(self):
+	def _forward_prop(self):
 		pass
 
-	def train(self):
-		pass
+	def train(self, data, iteration=3):
+		for _ in range(iteration):
+			inputs	= np.copy(data)
+			inputs	= np.random.shuffle(data)
+			inputs	= np.split(inputs, 5, axis=1)
+			for x in inputs:
+				print(x)
