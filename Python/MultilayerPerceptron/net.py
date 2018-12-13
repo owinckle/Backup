@@ -27,13 +27,21 @@ class Network():
 		outL("Shape", shape)
 		outL("Hidden Activation", h_active)
 		outL("Output Activation", o_active)
+		self.shape = shape
 
 		weights = []
 		for i in shape[1:]:
 			node = []
 			for x in range(i):
-				node.append(np.random.uniform(0.001, 0.1, shape[i - 1] + 1))
+				node.append(np.random.uniform(0.001, 0.1, shape[i - 1])) # + 1 if bias
 			weights.append(node)
+		self.weights = weights
 
-		for x in weights:
-			print(x)
+	def	_feed_backward(self):
+		pass
+
+	def _feed_forward(self):
+		pass
+
+	def train(self):
+		pass
