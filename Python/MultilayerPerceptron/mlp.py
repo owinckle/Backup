@@ -8,7 +8,7 @@ from net import Network, SIGMOID, SOFTMAX
 def main(dataset):
 	inputs	= np.array(pd.read_csv(dataset))
 	network = Network([2, 2, 1], SIGMOID, SIGMOID)
-	network.train(inputs)
+	network.train(inputs, iteration=1)
 
 if __name__ == "__main__":
 	if len(sys.argv) == 2:

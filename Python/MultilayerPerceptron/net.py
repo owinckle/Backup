@@ -43,13 +43,19 @@ class Network():
 	def	_backward_prop(self):
 		pass
 
-	def _forward_prop(self):
-		pass
+	def _forward_prop(self, inputs):
+		results	= []
+		results.append(inputs)
+		print(results)
+		for idx in range(len(self.shape) - 1):
+			results.append(np.dot(results[idx], self.weights[0]))
 
 	def train(self, data, iteration=3):
 		for _ in range(iteration):
 			inputs	= np.copy(data)
-			inputs	= np.random.shuffle(data)
-			inputs	= np.split(inputs, 5, axis=1)
-			for x in inputs:
-				print(x)
+			np.random.shuffle(inputs)
+			inputs	= np.split(inputs, 5)
+			# for batch in inputs:
+				# for inp in batch:
+					# self._forward_prop(inp)
+			
