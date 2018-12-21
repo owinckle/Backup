@@ -31,6 +31,8 @@ class Network():
 		outL("Hidden Activation", h_active)
 		outL("Output Activation", o_active)
 		self.shape = shape
+		self.h_active = np.vectorize(sigmoid)
+		# self.o_active = np.vectorize(softmax)
 
 		weights = []
 		for i in shape[1:]:

@@ -79,7 +79,6 @@ def gradient(data, _map, obs, n, iteration=0, lr=3.0):
 			sums = [0.] * n
 			for idx in range(obs):
 				for ind in range(n):
-					print(hypothesis(theta[house], data[idx]))
 					sums[ind] += (hypothesis(theta[house], data[idx]) - (_map[idx] == house)) * data[idx][ind]
 			for idx in range(n):
 				theta[house][idx] -= (lr / obs) * sums[idx]
