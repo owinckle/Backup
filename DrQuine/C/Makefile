@@ -17,15 +17,15 @@ OBJ3		=	$(addprefix $(OBJ_DIR), $(SRC3:.c=.o))
 all: $(NAME1) $(NAME2) $(NAME3)
 
 $(NAME1): $(OBJ1)
-	$(CC) $(CFLAGS) -o $(NAME1) $^
+	@$(CC) $(CFLAGS) -o $(NAME1) $^
 	@echo "\033[32m•\033[0m $(NAME1) is ready."
 
 $(NAME2): $(OBJ2)
-	$(CC) $(CFLAGS) -o $(NAME2) $^
+	@$(CC) $(CFLAGS) -o $(NAME2) $^
 	@echo "\033[32m•\033[0m $(NAME2) is ready."
 
 $(NAME3): $(OBJ3)
-	$(CC) $(CFLAGS) -o $(NAME3) $^
+	@$(CC) $(CFLAGS) -o $(NAME3) $^
 	@echo "\033[32m•\033[0m $(NAME3) is ready."
 
 $(OBJ_DIR)%.o: %.c
@@ -33,10 +33,12 @@ $(OBJ_DIR)%.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
-	rm -rf $(OBJ_DIR)
+	@rm -rf $(OBJ_DIR)
+	@echo "\033[32m•\033[0m .o file deleted."
 
 fclean: clean
-	rm -rf $(NAME1) $(NAME2) $(NAME3)
+	@rm -rf $(NAME1) $(NAME2) $(NAME3)
+	@echo "\033[32m•\033[0m Directory cleaned."
 
 re: fclean all
 
