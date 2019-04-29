@@ -1,28 +1,33 @@
 import numpy as np
 import pandas as pd
+import sys
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
 from toolbox import *
 
-def PredictOutput(X, Y, weights):
+def PredictOutput(X, Y, weights, debug, hla, ola):
 	correct	= 0
 
 	for i in range(len(X)):
-		x, y	= X[i], list(Y[i])
-		guess	= Predict(x, weights)
+		x, y			= X[i], list(Y[i])
+		guess, output	= Predict(x, weights, hla, ola)
 
-		print(guess)
+		if y == guess:
+			correct += 1
 
-def Accuracy(X, Y, weights):
+		if debug == True:
+			print(output)
+	print("Correctly predicted ({}/{})".format(correct, len(Y)))
+
+def Accuracy(X, Y, weights, hla, ola):
 	""" Run set through network, find overall accuracy """
 	correct	= 0
 
 	for i in range(len(X)):
-		x, y	= X[i], list(Y[i])
-		guess	= Predict(x, weights)
+		x, y			= X[i], list(Y[i])
+		guess, output	= Predict(x, weights, hla, ola)
 
 		if (y == guess):
-			# Guessed Correctly
 			correct += 1
 	return correct / len(X)
 
@@ -36,10 +41,13 @@ def InitializeWeights(nodes):
 		weights.append(np.matrix(w))
 	return weights
 
-def ForwardPropagation(x, weights, layers):
+def ForwardPropagation(x, weights, layers, hla, ola):
 	activations, layer_input = [x], x
 	for j in range(layers):
-		activation	= Sigmoid(np.dot(layer_input, weights[j].T))
+		if (j == layers - 1):
+			activation	= Activate(np.dot(layer_input, weights[j].T), ola)
+		else:
+			activation	= Activate(np.dot(layer_input, weights[j].T), hla)
 		activations.append(activation)
 		layer_input	= np.append(1, activation) # Augment with bias
 	return activations
@@ -63,23 +71,23 @@ def BackwardPropagation(y, activations, weights, layers, lr):
 		error			= np.dot(delta, w) # Calculate error for current layer
 	return weights
 
-def Train(X, Y, lr, weights):
+def Train(X, Y, lr, weights, hla, ola):
 	layers	= len(weights)
 
 	for i in range(len(X)):
 		x, y		= X[i], Y[i]
 		x			= np.matrix(np.append(1, x)) # Augment feature vector
 
-		activations	= ForwardPropagation(x, weights, layers)
+		activations	= ForwardPropagation(x, weights, layers, hla, ola)
 		weights		= BackwardPropagation(y, activations, weights, layers, lr)
 	return weights 
 
-def Predict(item, weights):
+def Predict(item, weights, hla, ola):
 	layers		= len(weights)
 	item		= np.append(1, item) # Augment feature vector
 
 	##_Forward Propagation_##
-	activations = ForwardPropagation(item, weights, layers)
+	activations = ForwardPropagation(item, weights, layers, hla, ola)
 
 	outputFinal	= activations[-1].A1
 	index		= FindMaxActivation(outputFinal)
@@ -88,23 +96,23 @@ def Predict(item, weights):
 	y			= [0 for i in range(len(outputFinal))]
 	y[index]	= 1 # Set guessed class to 1
 
-	return y # Return prediction vector
+	return y, np.around(outputFinal, decimals=3) # Return prediction vector
 
-def NeuralNetwork(X_train, Y_train, X_val=None, Y_val=None, epochs=10, nodes=[], lr=0.15):
+def NeuralNetwork(X_train,Y_train, X_val=None, Y_val=None, epochs=10, nodes=[], lr=0.15, epoch_acc=20, debug=False, hla="sigmoid", ola="softmax"):
 	hidden_layers	= len(nodes) - 1
 	weights			= InitializeWeights(nodes)
 
 	for epoch in range(1, epochs + 1):
-		weights	= Train(X_train, Y_train, lr, weights)
+		weights	= Train(X_train, Y_train, lr, weights, hla, ola)
 
-		if (epoch % 20 == 0):
-			print("Epoch {}".format(epoch))
-			print("Training Accuracy: {}".format(Accuracy(X_train, Y_train, weights)))
-			if X_val.any():
-				print("Validation Accuracy: {}".format(Accuracy(X_val, Y_val, weights)))
+		if (epoch % epoch_acc == 0 and debug == True):
+			print("Epoch {}/{} - loss: {} - val_loss: {}".format(epoch, epochs,
+			round(1 - Accuracy(X_train, Y_train, weights, hla, ola), 4),
+			round(1 - Accuracy(X_val, Y_val, weights, hla, ola), 4)))
 	return weights
 
-def main():
+def main(args):
+	dataset, debug, predict, train	= getParams(args)
 	iris	= pd.read_csv("data/iris.csv")
 	# iris	= iris.sample(frac=1).reset_index(drop=True) # Shuffle
 	X		= iris[["SepalLengthCm", "SepalWidthCm", "PetalLengthCm", "PetalWidthCm"]]
@@ -123,10 +131,22 @@ def main():
 	layers	= [f, 5, 10, o] # Number of nodes in layers
 	lr		= 0.15
 	epochs	= 100
+	hla		= "sigmoid"
+	ola		= "softmax"
 
-	weights	= NeuralNetwork(X_train, Y_train, X_val, Y_val, epochs=epochs, nodes=layers, lr=lr)
-	print("Testing Accuracy: {}".format(Accuracy(X_test, Y_test, weights)))
-	PredictOutput(X, Y, weights)
+	if (train == True):
+		weights	= NeuralNetwork(X_train, Y_train, X_val, Y_val,
+			epochs=epochs, nodes=layers, lr=lr, epoch_acc=1, debug=debug, hla="hla", ola="ola")
+		SaveWeights(weights)
+
+	if (predict == True):
+		if (train == False):
+			weights = GetWeights()
+		PredictOutput(X, Y, weights, debug, hla, ola)
 
 if __name__ == "__main__":
-	main()
+	if len(sys.argv) >= 2:
+		main(sys.argv)
+	else:
+		print("Missing arguments [python3 mlp.py <dataset.csv>]")
+		print("Need help? Try [python3 mlp.py -h]")
