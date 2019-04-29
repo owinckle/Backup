@@ -1,7 +1,7 @@
 import numpy as np
+import os
 
 def FindMaxActivation(output):
-	""" Find max activation in output """
 	m, index	= output[0], 0
 
 	for i in range(1, len(output)):
@@ -37,6 +37,14 @@ def GetWeights():
 		print("No weights have been found, try training the network")
 		exit()
 
+def SaveModel():
+	user_input	= input("Would you like to save this model ? [y/n]: ")
+	if (user_input == "y"):
+		system("mv saved_weights.npy saved/{}.npy".format(input("File name: ")))
+	else:
+		exit()
+
+
 def Helper():
 	print("Useful parameters:")
 	print("Use python3 mlp.py <dataset.csv> to pass a dataset to the Network")
@@ -48,6 +56,7 @@ def getParams(args):
 	debug	= False
 	predict	= False
 	train	= False
+	model	= False
 
 	if "-d" in args:
 		debug	= True
@@ -61,4 +70,12 @@ def getParams(args):
 	if "-h" in args:
 		Helper()
 
-	return args[1], debug, predict, train
+	if "-model" in args:
+		if (args.index("-model") + 1):
+			model = args.index("-model") + 1
+
+	if not (os.path.isfile(args[1])):
+		print("Dataset {} does not exist or can't be accessed".format(args[1]))
+		exit()
+
+	return args[1], debug, predict, train, model
